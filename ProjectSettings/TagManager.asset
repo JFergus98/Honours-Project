@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - ObstacleBounds
+  - PlayerBounds
   layers:
   - Default
   - TransparentFX

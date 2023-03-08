@@ -26,4 +26,15 @@ public class PlayerCollison : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        // If player collider exits PlayerBounds, then restart level
+        if (collider.CompareTag("PlayerBounds"))
+        {    
+            Debug.Log(collider.name);
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
 }
