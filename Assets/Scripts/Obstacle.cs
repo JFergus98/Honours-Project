@@ -28,7 +28,7 @@ public class Obstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector3(speed*direction, 0, 0);
+        //rb.velocity = new Vector3(speed*direction, 0, 0);
 
         // // if gameObject's position is out of bounds, then destroy gameObject
         // if(transform.position.x < -outOfBounds || transform.position.x > outOfBounds){
