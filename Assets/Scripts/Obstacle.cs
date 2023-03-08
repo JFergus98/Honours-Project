@@ -37,12 +37,11 @@ public class Obstacle : MonoBehaviour
 
     private void OnTriggerExit(Collider collider)
     {
-        Debug.Log("test");
         // If player collider collides with an Obstacle, then restart level
         if (collider.CompareTag("ObstacleBounds")) {    
-            Debug.Log(collider.name);
             Destroy(this.gameObject);
-            Debug.Log("Obsticle destroyed");
+            // Debug.Log(collider.name);
+            // Debug.Log("Obsticle destroyed");
         }
     }
 }
