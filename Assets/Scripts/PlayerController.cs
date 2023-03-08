@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Vector3 wallNormal;
     //sphercast
     // public float sphereRadius = 0.3f;
     // public float sphereCastDistance = 1.6f;
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour
         // Debug.Log("grounded: " + IsGrounded()); // Testing
         // Debug.Log(playerRb.velocity); // Testing
         // Debug.Log("OnSlope: " + OnSlope()); // Testing
+        Debug.Log("IsTouchingWall: " + IsTouchingWall()); // Testing
     }
 
     // FixedUpdate is called once per 0.02 seconds
@@ -101,8 +103,15 @@ public class PlayerController : MonoBehaviour
             movement = GetSlopeMovement(movement);
         }
         
+        movement = movement.normalized;
+
+        if (IsTouchingWall()) {
+            movement = GetWallMovement(movement);
+        }
+
+
         // Move the player
-        playerRb.AddForce(movement.normalized * speed, ForceMode.Force);
+        playerRb.AddForce(movement * speed, ForceMode.Force);
 
         // If player is grounded and there is no move input, then apply a friction force
         if (OnSlope() && Mathf.Abs(moveInput.magnitude) < 0.01f) {
@@ -213,5 +222,50 @@ public class PlayerController : MonoBehaviour
     private Vector3 GetSlopeMovement(Vector3 movement)
     {
         return Vector3.ProjectOnPlane(movement, hitInfo.normal);
+    }
+
+    // Returns true if the player object is in contact with a wall while airborn
+    private bool IsTouchingWall()
+    {   
+        if (Physics.CheckBox(transform.position, Vector3.one * 0.6f, Quaternion.identity, groundLayerMask) && Physics.CheckCapsule(transform.position + Vector3.up * 0.5f, transform.position + Vector3.down * 0.5f, 0.6f, groundLayerMask))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private Vector3 GetWallMovement(Vector3 movement)
+    {
+        if (movement.x < 0 && wallNormal.normalized.x > 0) {
+            movement.x = 0;
+        }
+        else if (movement.x > 0 && wallNormal.normalized.x < 0) {
+            movement.x = 0;
+        }
+        if (movement.z < 0 && wallNormal.normalized.z > 0) {
+            movement.z = 0;
+        }
+        else if (movement.z > 0 && wallNormal.normalized.z < 0) {
+            movement.z = 0;
+        }
+        return movement;
+    }
+
+    void OnCollisionStay(Collision collision) {
+        ContactPoint contact = collision.contacts[0];
+
+        // Visualize the contact point
+        Debug.DrawRay(contact.point, contact.normal, Color.red);
+        
+        if (new Vector2(contact.normal.x, contact.normal.z).magnitude == 1) { 
+            // if (contact.normal.x >= contact.normal.z) {
+            //     wallNormal = new Vector3(contact.normal.x, 0 ,0);
+            // }
+            // else {
+            //     wallNormal = new Vector3(0, 0 ,contact.normal.z);
+            // }
+            
+            wallNormal = new Vector3(contact.normal.x, 0 ,contact.normal.z);
+        }
     }
 }
