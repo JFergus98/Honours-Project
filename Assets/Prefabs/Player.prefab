@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3878747497996260621}
   - component: {fileID: 3878747497996260610}
   - component: {fileID: 3878747497996260611}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3878747498285485480}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 3878747498598835907}
   - component: {fileID: 3878747498598835930}
   - component: {fileID: 3878747498598835929}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 3878747499328540839}
   - component: {fileID: 3878747499328540836}
   - component: {fileID: 3878747499328540837}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3878747499511089355}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: CamPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 3878747499927872063}
   - component: {fileID: 3878747499927872056}
   - component: {fileID: 3878747499927872057}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: PlayerObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
