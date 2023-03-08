@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         movement.y = 0f;
         
         // If the player is on a slope, then get slope movement
-        if(OnSlope() && IsGrounded()) {
+        if (OnSlope()) {
             movement = GetSlopeMovement(movement);
         }
         
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // If player is on a slope and is grounded, then disable gravity and apply a force on the player towrds the slope
-        if (OnSlope() && IsGrounded()) {
+        if (OnSlope()) {
             playerRb.AddForce(-hitInfo.normal * 50f, ForceMode.Force);
             playerRb.useGravity = false;
         }else{
@@ -188,9 +188,12 @@ public class PlayerController : MonoBehaviour
     private bool OnSlope()
     {   
         // If player is jumping, then return false
-        if (isJumping) {
+        if (!IsGrounded()) {
             return false;
         }
+        // if (!Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayerMask)) {
+        //     return false; 
+        // }
         // If player is not in contact with the ground, then return false
         // if (!Physics.SphereCast(transform.position, groundCheckRadius, Vector3.down, out hitInfo, 1f, groundLayerMask)) {
         //     return false;
@@ -198,7 +201,6 @@ public class PlayerController : MonoBehaviour
         if (!Physics.BoxCast(transform.position, new Vector3(groundCheckRadius, groundCheckRadius, groundCheckRadius), Vector3.down, out hitInfo, Quaternion.identity, 0.5f, groundLayerMask)) {
             return false;
         }
-        
         // If the ground is a not a slope, then return false
         if(hitInfo.normal == Vector3.up) {
             return false;
