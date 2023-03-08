@@ -9,7 +9,7 @@ public class CinemachinePOVExtension : CinemachineExtension
     private Vector3 camRotation;
 
     private float sensitivity = 35f;
-    private float verticalClampAngle = 90f;
+    private float verticalClampAngle = 89f;
 
     // Awake is called when the script instance is being loaded
     protected override void Awake()
