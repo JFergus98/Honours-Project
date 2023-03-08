@@ -102,11 +102,9 @@ public class PlayerController : MonoBehaviour
         if (OnSlope()) {
             movement = GetSlopeMovement(movement);
         }
-        
-        movement = movement.normalized;
 
         if (IsTouchingWall()) {
-            movement = GetWallMovement(movement);
+            movement = GetWallMovement(movement.normalized);
         }
 
         // Move the player
