@@ -84,8 +84,9 @@ public class PlayerController : MonoBehaviour
         
         // Debug.Log("grounded: " + IsGrounded()); // Testing
         // Debug.Log(playerRb.velocity); // Testing
+        // Debug.Log(playerRb.velocity.magnitude); // Testing
         // Debug.Log("OnSlope: " + OnSlope()); // Testing
-        Debug.Log("IsTouchingWall: " + IsTouchingWall()); // Testing
+        // Debug.Log("IsTouchingWall: " + IsTouchingWall()); // Testing
     }
 
     // FixedUpdate is called once per 0.02 seconds
@@ -97,15 +98,19 @@ public class PlayerController : MonoBehaviour
         // Combine the player movement input with the direction of the player camera
         movement = orientation.forward * movement.z + orientation.right * movement.x;
         movement.y = 0f;
+        movement.Normalize();
         
         // If the player is on a slope, then get slope movement
         if (OnSlope()) {
             movement = GetSlopeMovement(movement);
         }
-
+        
+        float wallMod = 1;
         if (IsTouchingWall()) {
-            movement = GetWallMovement(movement.normalized);
+            movement = GetWallMovement(movement.normalized, out wallMod);
         }
+
+        Debug.Log("wallMod: " + wallMod);
 
         // Move the player
         playerRb.AddForce(movement * speed, ForceMode.Force);
@@ -122,7 +127,7 @@ public class PlayerController : MonoBehaviour
         
         // If players grounded velocity is greater than max speed, then limit ther velocity
         if  (groundVelocity.magnitude > maxSpeed) {
-            Vector3 maxVelocity = groundVelocity.normalized * maxSpeed;
+            Vector3 maxVelocity = groundVelocity.normalized * maxSpeed * wallMod;
             playerRb.velocity = new Vector3(maxVelocity.x, playerRb.velocity.y, maxVelocity.z);
         }
 
@@ -231,8 +236,10 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    private Vector3 GetWallMovement(Vector3 movement)
+    private Vector3 GetWallMovement(Vector3 movement, out float result)
     {
+        float initialMag = movement.magnitude;
+
         if (movement.x < 0 && wallNormal.normalized.x > 0) {
             movement.x = 0;
         }
@@ -245,6 +252,12 @@ public class PlayerController : MonoBehaviour
         else if (movement.z > 0 && wallNormal.normalized.z < 0) {
             movement.z = 0;
         }
+        
+        float finalMag = movement.magnitude;
+        result = finalMag/initialMag;
+
+        // Debug.Log("result: " + result);
+
         return movement;
     }
 
