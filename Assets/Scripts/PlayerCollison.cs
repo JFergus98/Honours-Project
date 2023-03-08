@@ -16,16 +16,16 @@ public class PlayerCollison : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        // If player collider collides with an Obstacle, then restart level
-        if (collider.CompareTag("Obstacle"))
-        {    
-            Debug.Log(collider.name);
+    // private void OnTriggerEnter(Collider collider)
+    // {
+    //     // If player collider collides with an Obstacle, then restart level
+    //     if (collider.CompareTag("Obstacle"))
+    //     {    
+    //         Debug.Log(collider.name);
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
+    //         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    //     }
+    // }
 
     private void OnTriggerExit(Collider collider)
     {
