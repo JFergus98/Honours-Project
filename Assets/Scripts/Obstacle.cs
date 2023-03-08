@@ -12,7 +12,7 @@ public class Obstacle : MonoBehaviour
     // Awake is called when the script instance is being loaded
     void Awake()
     {
-
+        
     }
 
     // Start is called before the first frame update
@@ -28,6 +28,8 @@ public class Obstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        rb.velocity = new Vector3(speed*direction, 0, 0);
+
         // // if gameObject's position is out of bounds, then destroy gameObject
         // if(transform.position.x < -outOfBounds || transform.position.x > outOfBounds){
         //     Destroy(this.gameObject);
