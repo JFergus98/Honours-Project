@@ -109,7 +109,6 @@ public class PlayerController : MonoBehaviour
             movement = GetWallMovement(movement);
         }
 
-
         // Move the player
         playerRb.AddForce(movement * speed, ForceMode.Force);
 
