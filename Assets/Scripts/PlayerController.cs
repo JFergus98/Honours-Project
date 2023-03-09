@@ -82,11 +82,13 @@ public class PlayerController : MonoBehaviour
         // if (playerRb.velocity.y < 0) Debug.Log("playerRb.velocity.y <= 0"); // Testing
         // Debug.Log(groundCheck.position); // Testing
         
-        // Debug.Log("grounded: " + IsGrounded()); // Testing
+        Debug.Log("grounded: " + IsGrounded()); // Testing
         // Debug.Log(playerRb.velocity); // Testing
         // Debug.Log(playerRb.velocity.magnitude); // Testing
         // Debug.Log("OnSlope: " + OnSlope()); // Testing
+        
         // Debug.Log("IsTouchingWall: " + IsTouchingWall()); // Testing
+        // Debug.Log("wallMod: " + wallMod);
     }
 
     // FixedUpdate is called once per 0.02 seconds
@@ -109,8 +111,6 @@ public class PlayerController : MonoBehaviour
         if (IsTouchingWall()) {
             movement = GetWallMovement(movement.normalized, out wallMod);
         }
-
-        Debug.Log("wallMod: " + wallMod);
 
         // Move the player
         playerRb.AddForce(movement * speed, ForceMode.Force);
@@ -238,7 +238,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 GetWallMovement(Vector3 movement, out float result)
     {
-        float initialMag = movement.magnitude;
+        float initialMag = movement.magnitude; 
 
         if (movement.x < 0 && wallNormal.normalized.x > 0) {
             movement.x = 0;
@@ -254,7 +254,12 @@ public class PlayerController : MonoBehaviour
         }
         
         float finalMag = movement.magnitude;
-        result = finalMag/initialMag;
+
+        if (initialMag != 0){
+            result = finalMag/initialMag;
+        }else{
+            result = 1;
+        }
 
         // Debug.Log("result: " + result);
 
