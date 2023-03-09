@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private float speed = 50f;
     [SerializeField]private float maxSpeed = 7f;
     private const float frictionForce = 0.2f;
-    private const float groundCheckRadius = 0.499f;
+    private const float groundCheckRadius = 0.45f;
 
     [SerializeField]private float jumpForce  = 5.56f;
     private bool isJumping;
