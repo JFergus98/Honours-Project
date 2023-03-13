@@ -11,13 +11,13 @@ public class SpawnFakePlatforms : MonoBehaviour
 
 
     // Awake is called when the script instance is being loaded
-    void Awake()
+    private void Awake()
     {
 
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // random seed (5 for testing)
         Random.InitState(5);
@@ -38,7 +38,7 @@ public class SpawnFakePlatforms : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
