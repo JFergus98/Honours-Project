@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class GhostDataList
+public class Ghost
 {
     [field: SerializeField]
     public List<GhostData> ghostData { get; private set; }
 
-    public GhostDataList()
+    public Ghost()
     {
         this.ghostData = new List<GhostData>();
     }
