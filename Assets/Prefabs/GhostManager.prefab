@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973ea891bd42d37429d0210a56131eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghost: {fileID: 11400000, guid: 8ae47e175ba957048b498309bc72b239, type: 2}
+  ghostScrObj: {fileID: 11400000, guid: 8ae47e175ba957048b498309bc72b239, type: 2}
   ghostPrefab: {fileID: 6106580393215706250, guid: 7ac2c57e2afd4304e9c1598f9973b007, type: 3}
