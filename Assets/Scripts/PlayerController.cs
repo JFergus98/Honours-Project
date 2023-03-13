@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     private float maxSlopeAngle = 40;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         inputManager = InputManager.Instance;
         playerRb = GetComponent<Rigidbody>();
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Get player movement input;
         moveInput = inputManager.GetPlayerMovement();
