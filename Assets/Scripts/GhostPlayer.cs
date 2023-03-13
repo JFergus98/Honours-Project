@@ -4,86 +4,83 @@ using UnityEngine;
 
 public class GhostPlayer : MonoBehaviour
 {
-    [SerializeField]
-    private GhostScriptableObject ghost;
-    private float time;
-    private float offset = 0.0f;
-    private List<int> index;
-    private List<int> nextindex;
+    [SerializeField] private GhostScriptableObject ghostScrObj;
+    [SerializeField] private GameObject ghostPrefab;
 
     private List<GameObject> ghostObjects;
-    
-    [SerializeField]
-    private GameObject ghostPrefab;
+    private List<int> indexs;
+    private float time;
+    private float offset = 0.0f;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         ghostObjects = new List<GameObject>();
+        indexs = new List<int>();
 
         time = offset;
-        index = new List<int>();
-        nextindex = new List<int>();
 
-        Debug.Log(ghost.ghostDataList.Count);
+        Debug.Log("ghostScrObj.ghostDataList.Count" + ghostScrObj.ghosts.Count);
 
-        if (ghost.ghostDataList.Count > 1)
+        if (ghostScrObj.ghosts.Count > 1)
         {
-            for (int i = 1; i < ghost.ghostDataList.Count; i++)
+            for (int i = 1; i < ghostScrObj.ghosts.Count; i++)
             {
                 ghostObjects.Insert(0, Instantiate(ghostPrefab, this.transform));
 
-                index.Insert(0, 0);
-                nextindex.Insert(0, 0);
+                indexs.Insert(0, 0);
 
-                Debug.Log("created ghost");
+                Debug.Log("Created new ghost object");
             }
         }
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        // Increment time
         time += Time.deltaTime;
 
-        if (ghost.isReplay) {
+        if (ghostScrObj.isReplay) {
 
-            for (int i = 1; i < ghost.ghostDataList.Count; i++) {
+            UpdateGhostObjects();
+        }
+    }
 
-                if (nextindex[i-1] < ghost.ghostDataList[i].ghostData.Count) {
+    // Update the ghost objects based on the current time
+    private void UpdateGhostObjects()
+    {
+        for (int i = 1; i < ghostScrObj.ghosts.Count; i++) {
+
+            //int index = indexs[i-1];
+            
+            if (indexs[i-1]+1 < ghostScrObj.ghosts[i].ghostData.Count) {
+
+                GhostData currGhostData = ghostScrObj.ghosts[i].ghostData[indexs[i-1]];
+                GhostData nextGhostData = ghostScrObj.ghosts[i].ghostData[indexs[i-1]+1];
                     
+                if (time > currGhostData.timeStamp && time < nextGhostData.timeStamp) {
                     
-                    if (time > ghost.ghostDataList[i].ghostData[index[i-1]].timeStamp && time < ghost.ghostDataList[i].ghostData[index[i-1]+1].timeStamp) {
-                        
-                        float interpolationFactor = (time - ghost.ghostDataList[i].ghostData[index[i-1]].timeStamp)/(ghost.ghostDataList[i].ghostData[index[i-1]+1].timeStamp - ghost.ghostDataList[i].ghostData[index[i-1]].timeStamp);
-                        
-                        ghostObjects[i-1].transform.position = Vector3.Lerp(ghost.ghostDataList[i].ghostData[index[i-1]].position, ghost.ghostDataList[i].ghostData[index[i-1]+1].position, interpolationFactor);
-                        ghostObjects[i-1].transform.rotation = Quaternion.Lerp(ghost.ghostDataList[i].ghostData[index[i-1]].rotation, ghost.ghostDataList[i].ghostData[index[i-1]+1].rotation, interpolationFactor);
-
-                        Debug.Log("if 2 - time :");
-                    }
-
-                    else if (time == ghost.ghostDataList[i].ghostData[nextindex[i-1]].timeStamp) {
-                        ghostObjects[i-1].transform.position = ghost.ghostDataList[i].ghostData[index[i-1]].position;
-                        ghostObjects[i-1].transform.rotation = ghost.ghostDataList[i].ghostData[index[i-1]].rotation;
-
-                        nextindex[i-1]++;
-                        index[i-1] = nextindex[i-1] - 1;
-
-                        Debug.Log("if 1 - time :");
-                    }
-
-                    if (time > ghost.ghostDataList[i].ghostData[nextindex[i-1]].timeStamp) {
-                        nextindex[i-1]++;
-                        index[i-1] = nextindex[i-1] - 1;
-
-                        Debug.Log("if 0 - time :");
-                    }
+                    float interpolationFactor = (time - currGhostData.timeStamp)/(nextGhostData.timeStamp - currGhostData.timeStamp);
+                    
+                    ghostObjects[i-1].transform.position = Vector3.Lerp(currGhostData.position, nextGhostData.position, interpolationFactor);
+                    ghostObjects[i-1].transform.rotation = Quaternion.Lerp(currGhostData.rotation, nextGhostData.rotation, interpolationFactor);
                 }
-                else if (ghostObjects[i-1].activeSelf)
-                {
-                    ghostObjects[i-1].SetActive(false);
+
+                else if (time == nextGhostData.timeStamp) {
+                    ghostObjects[i-1].transform.position = currGhostData.position;
+                    ghostObjects[i-1].transform.rotation = currGhostData.rotation;
+
+                    indexs[i-1]++;
                 }
+
+                if (time > nextGhostData.timeStamp) {
+                    indexs[i-1]++;
+                }
+            }
+            else if (ghostObjects[i-1].activeSelf)
+            {
+                ghostObjects[i-1].SetActive(false);
             }
         }
     }
