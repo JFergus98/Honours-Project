@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]public class PlatformRow
+[Serializable]
+public class PlatformRow
 {
     // Declare variables
-    [SerializeField]private List<GameObject> platforms;
+    [SerializeField]
+    private List<GameObject> platforms;
     
     // Get the list of platforms
     public List<GameObject> getPlatforms()
