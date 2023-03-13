@@ -9,13 +9,13 @@ public class SpawnObstacles : MonoBehaviour
     [SerializeField]private List<Spawner> spawnerList = new List<Spawner>();
 
     // Awake is called when the script instance is being loaded
-    void Awake()
+    private void Awake()
     {
         
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // random seed (5 for testing)
         Random.InitState(5);
@@ -27,7 +27,7 @@ public class SpawnObstacles : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
