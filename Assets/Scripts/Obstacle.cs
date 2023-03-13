@@ -10,13 +10,13 @@ public class Obstacle : MonoBehaviour
     private Rigidbody rb;
 
     // Awake is called when the script instance is being loaded
-    void Awake()
+    private void Awake()
     {
         
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = this.GetComponent<Rigidbody>();
         
@@ -26,7 +26,7 @@ public class Obstacle : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         //rb.velocity = new Vector3(speed*direction, 0, 0);
 
