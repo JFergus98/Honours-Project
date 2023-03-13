@@ -14,5 +14,5 @@ public class GhostScriptableObject : ScriptableObject
     public float recordFrequency { get; private set; }
 
     [field: SerializeField]
-    public List<GhostDataList> ghostDataList { get; private set; }
+    public List<Ghost> ghosts { get; private set; }
 }
