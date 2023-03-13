@@ -33,7 +33,7 @@ public class SpawnFakePlatforms : MonoBehaviour
         foreach (PlatformRow row in platformList) {
             int index = Random.Range(0, row.count());
                 row.getElementAt(index).GetComponent<Collider>().enabled = true;
-                Debug.Log(index);
+                Debug.Log("fake: " + index);
         }
     }
 
