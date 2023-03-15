@@ -12,14 +12,14 @@ public class Obstacle : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        
+        // Get the Obstacle's rigidbody component
+        rb = this.GetComponent<Rigidbody>();
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        rb = this.GetComponent<Rigidbody>();
-        
+        // Set the Obstacle Velocity
         rb.velocity = new Vector3(speed*direction, 0, 0);
         
         //rb.AddForce(-speed, 0, 0, ForceMode.VelocityChange);
@@ -39,7 +39,7 @@ public class Obstacle : MonoBehaviour
 
     private void OnTriggerExit(Collider collider)
     {
-        // If player collider collides with an Obstacle, then restart level
+        // If obstacle collider collides with ObstacleBounds, then destroy Obastacle
         if (collider.CompareTag("ObstacleBounds")) {    
             Destroy(this.gameObject);
             // Debug.Log(collider.name);
