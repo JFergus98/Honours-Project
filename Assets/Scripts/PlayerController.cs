@@ -41,8 +41,8 @@ public class PlayerController : MonoBehaviour
 
     private float maxSlopeAngle = 40;
 
-    // Start is called before the first frame update
-    private void Start()
+    // Awake is called when the script instance is being loaded
+    private void Awake()
     {
         inputManager = InputManager.Instance;
         playerRb = GetComponent<Rigidbody>();
