@@ -10,17 +10,15 @@ public class GhostPlayer : MonoBehaviour
     private List<GameObject> ghostObjects;
     private List<int> indexs;
     private float time;
-    private float offset = 0.0f;
+    private const float offset = 0.0f;
 
-    // Start is called before the first frame update
-    private void Start()
+    // Awake is called when the script instance is being loaded
+    private void Awake()
     {
         ghostObjects = new List<GameObject>();
         indexs = new List<int>();
 
-        time = offset;
-
-        Debug.Log("ghostScrObj.ghostDataList.Count" + ghostScrObj.ghosts.Count);
+        Debug.Log("ghostScrObj.ghostDataList.Count " + ghostScrObj.ghosts.Count);
 
         if (ghostScrObj.ghosts.Count > 1)
         {
@@ -33,6 +31,12 @@ public class GhostPlayer : MonoBehaviour
                 Debug.Log("Created new ghost object");
             }
         }
+    }
+
+    // Start is called before the first frame update
+    private void Start()
+    {
+        time = offset;
     }
 
     // Update is called once per frame
