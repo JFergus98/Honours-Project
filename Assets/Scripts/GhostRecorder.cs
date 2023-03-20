@@ -14,25 +14,21 @@ public class GhostRecorder : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        if (ghostScrObj.isRecord) {
-            // Add new ghost to the start of the list
-            ghostScrObj.ghosts.Insert(0, new Ghost());
+        // Add new ghost to the start of the list
+        ghostScrObj.ghosts.Insert(0, new Ghost());
 
-            // If List size is greater than max recordings, then remove excess items at end of list
-            if (ghostScrObj.ghosts.Count > maxRecordings) {
-                ghostScrObj.ghosts.RemoveRange(maxRecordings, ghostScrObj.ghosts.Count-maxRecordings);
-            }
+        // If List size is greater than max recordings, then remove excess items at end of list
+        if (ghostScrObj.ghosts.Count > maxRecordings) {
+            ghostScrObj.ghosts.RemoveRange(maxRecordings, ghostScrObj.ghosts.Count-maxRecordings);
         }
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        if (ghostScrObj.isRecord) {
-            // Set time and timer to 0
-            timer = 0;
-            time = 0;
-        }
+        // Set time and timer to 0
+        timer = 0;
+        time = 0;
     }
 
     // LateUpdate is called after all Update functions have been called
@@ -43,7 +39,7 @@ public class GhostRecorder : MonoBehaviour
         time += Time.deltaTime;
 
         // If recording and it is time to record
-        if (ghostScrObj.isRecord && timer >= 1/ghostScrObj.recordFrequency) {
+        if (timer >= 1/ghostScrObj.recordFrequency) {
 
             // Get current time, position and rotation data
             GhostData data = new GhostData(time, this.transform.position, this.transform.rotation);
