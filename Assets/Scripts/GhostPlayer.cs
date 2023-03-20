@@ -45,10 +45,8 @@ public class GhostPlayer : MonoBehaviour
         // Increment time
         time += Time.deltaTime;
 
-        if (ghostScrObj.isReplay) {
-
-            UpdateGhostObjects();
-        }
+        UpdateGhostObjects();
+        
     }
 
     // Update the ghost objects based on the current time
