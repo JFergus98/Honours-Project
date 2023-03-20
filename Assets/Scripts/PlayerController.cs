@@ -39,15 +39,19 @@ public class PlayerController : MonoBehaviour
 
     private RaycastHit hitInfo;
 
-    private float maxSlopeAngle = 40;
+    //private float maxSlopeAngle = 40;
 
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        inputManager = InputManager.Instance;
         playerRb = GetComponent<Rigidbody>();
         groundCheck = this.gameObject.transform.GetChild(1);
         orientation = Camera.main.transform;
+    }
+
+    private void Start()
+    {
+        inputManager = InputManager.Instance;
     }
 
     // Update is called once per frame
@@ -82,7 +86,7 @@ public class PlayerController : MonoBehaviour
         // if (playerRb.velocity.y < 0) Debug.Log("playerRb.velocity.y <= 0"); // Testing
         // Debug.Log(groundCheck.position); // Testing
         
-        Debug.Log("grounded: " + IsGrounded()); // Testing
+        // Debug.Log("grounded: " + IsGrounded()); // Testing
         // Debug.Log(playerRb.velocity); // Testing
         // Debug.Log(playerRb.velocity.magnitude); // Testing
         // Debug.Log("OnSlope: " + OnSlope()); // Testing
