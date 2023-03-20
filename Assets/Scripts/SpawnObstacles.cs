@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnObstacles : MonoBehaviour
 {
+    [SerializeField]private SeedScriptableObject seedScrObj;
     [SerializeField]private float minTime = 0.1f;
     [SerializeField]private float maxTime = 5.0f;
     [SerializeField]private List<Spawner> spawnerList = new List<Spawner>();
@@ -18,7 +19,8 @@ public class SpawnObstacles : MonoBehaviour
     private void Start()
     {
         // random seed (5 for testing)
-        Random.InitState(5);
+        //Random.InitState(5);
+        Random.InitState(seedScrObj.seed);
 
         // Run ObstacleSpawner() function for each spawner in the list
         foreach (Spawner spawner in spawnerList) {
