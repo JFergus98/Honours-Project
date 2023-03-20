@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f073aabc306bf2e49bd73ce21415fdae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seedScrObj: {fileID: 11400000, guid: 6aa96652a4fd17d44b28af8665a44d1e, type: 2}
   NoOfRows: 5
   platformList:
   - platforms:
