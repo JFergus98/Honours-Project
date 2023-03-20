@@ -1744,6 +1744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e639ab86829ab84aa09febe320bd883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seedScrObj: {fileID: 11400000, guid: 6aa96652a4fd17d44b28af8665a44d1e, type: 2}
   minTime: 0.1
   maxTime: 3
   spawnerList:
