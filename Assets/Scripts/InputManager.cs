@@ -24,7 +24,7 @@ public sealed class InputManager : MonoBehaviour
         }
         else {
             _instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
 
         playerInputActions = new PlayerInputActions();
@@ -62,5 +62,11 @@ public sealed class InputManager : MonoBehaviour
     public bool PlayerJumped()
     {
         return playerInputActions.Player.Jump.triggered;
+    }
+
+    // Returns true if Pause button is pressed
+    public bool Pause()
+    {
+        return playerInputActions.UI.Pause.triggered;
     }
 }
