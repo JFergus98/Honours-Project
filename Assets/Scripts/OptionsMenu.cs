@@ -31,17 +31,11 @@ public class OptionsMenu : MonoBehaviour
     {
         //PlayerPrefs.DeleteAll();
 
-        Debug.Log(PlayerPrefs.GetInt("MasterVolume"));
-        Debug.Log(PlayerPrefs.GetInt("FOV"));
-        Debug.Log(PlayerPrefs.GetInt("MouseSensitivity"));
-
         volumeSlider.value = PlayerPrefs.GetInt("MasterVolume");
         fovSlider.value = PlayerPrefs.GetInt("FOV");
-        sensSlider.value = PlayerPrefs.GetInt("MouseSensitivity");
+        sensSlider.value = PlayerPrefs.GetFloat("MouseSensitivity")*100;
 
-        Debug.Log(PlayerPrefs.GetInt("MasterVolume"));
-        Debug.Log(PlayerPrefs.GetInt("FOV"));
-        Debug.Log(PlayerPrefs.GetInt("MouseSensitivity"));
+        Debug.Log(PlayerPrefs.GetFloat("MouseSensitivity")*100); // Testing
     }
 
     public void SetVolume(float volume)
@@ -65,6 +59,8 @@ public class OptionsMenu : MonoBehaviour
     {
         sensText.text = (sens+50).ToString();
 
-        PlayerPrefs.SetInt("MouseSensitivity", ((int)sens));
+        PlayerPrefs.SetFloat("MouseSensitivity", (sens/100));
+
+        //Debug.Log(PlayerPrefs.GetFloat("MouseSensitivity")); // Testing
     }
 }
