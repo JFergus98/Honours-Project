@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         orientation = Camera.main.transform;
     }
 
+   // Start is called before the first frame update
     private void Start()
     {
         inputManager = InputManager.Instance;
