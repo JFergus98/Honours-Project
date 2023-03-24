@@ -8,7 +8,7 @@ public class CinemachinePOVExtension : CinemachineExtension
     private InputManager inputManager;
     private Vector3 camRotation;
 
-    private float sensitivity = 0.1f;
+    private float sensitivity = 0.5f;
     private float verticalClampAngle = 89f;
 
     // Awake is called when the script instance is being loaded
@@ -25,6 +25,8 @@ public class CinemachinePOVExtension : CinemachineExtension
                 
                 // Get mouse input
                 Vector2 mouseInput = inputManager.GetPlayerMouseMovement();
+
+                sensitivity = PlayerPrefs.GetFloat("MouseSensitivity") + 0.5f;
                 
                 camRotation.x += mouseInput.x * sensitivity;
                 camRotation.y += mouseInput.y * sensitivity;
@@ -40,4 +42,6 @@ public class CinemachinePOVExtension : CinemachineExtension
             }
         }
     }
+
+    
 }
