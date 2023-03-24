@@ -22,9 +22,6 @@ public class MainMenu : MonoBehaviour
         mainMenuButton = mainMenu.transform.GetChild(0).gameObject;
         optionsButton = optionsMenu.transform.GetChild(0).gameObject;
         levelSelectButton = levelSelectMenu.transform.GetChild(0).GetChild(0).gameObject;
-        //optionsMenu = GameObject.Find("OptionsMenu");
-        
-        //playButton = GameObject.Find("playButton");
     }
 
     // Start is called before the first frame update
@@ -72,7 +69,7 @@ public class MainMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(mainMenuButton);
     }
 
-    public void LoadLevel (string name)
+    public void LoadLevel(string name)
     {
         ghostScrObj.ghosts.Clear();
         seedScrObj.GenerateSeed();
