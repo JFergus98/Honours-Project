@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GhostRecorder : MonoBehaviour
 {
-    [SerializeField]
-    private GhostScriptableObject ghostScrObj;
+    [SerializeField] private GhostScriptableObject ghostScrObj;
+
+    private bool record;
     private int index;
     private float timer;
     private float time;
@@ -14,8 +15,27 @@ public class GhostRecorder : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        // Add new ghost to the start of the list
-        ghostScrObj.ghosts.Insert(0, new Ghost());
+        // If GameManager exists, then start recording
+        if (GameObject.Find("GhostManager")) {
+            record = true;
+            Debug.Log("Recording has started");
+        }else{
+            record = false;
+        }
+        
+        // If recording
+        if (record) {
+            // Add new ghost to the start of the list
+            ghostScrObj.ghosts.Insert(0, new Ghost());
+
+            // If List size is greater than max recordings, then remove excess items at end of list
+            if (ghostScrObj.ghosts.Count > maxRecordings) {
+                ghostScrObj.ghosts.RemoveRange(maxRecordings, ghostScrObj.ghosts.Count-maxRecordings);
+            }
+        }else{
+            // Delete recordings
+            ghostScrObj.ghosts.Clear();
+        }
 
         // If List size is greater than max recordings, then remove excess items at end of list
         if (ghostScrObj.ghosts.Count > maxRecordings) {
@@ -39,7 +59,7 @@ public class GhostRecorder : MonoBehaviour
         time += Time.deltaTime;
 
         // If recording and it is time to record
-        if (timer >= 1/ghostScrObj.recordFrequency) {
+        if (record && timer >= 1/ghostScrObj.recordFrequency) {
 
             // Get current time, position and rotation data
             GhostData data = new GhostData(time, this.transform.position, this.transform.rotation);
