@@ -34,7 +34,7 @@ public class CinemachinePOVExtension : CinemachineExtension
                 Vector2 mouseInput = inputManager.GetPlayerMouseMovement();
 
                 // Set sensivity to stored value
-                sensitivity = PlayerPrefs.GetFloat("MouseSensitivity") + 0.25f;
+                sensitivity = PlayerPrefs.GetFloat("MouseSensitivity");
 
                 // If game is paused, then disable mouse look by setting sensitivity to 0
                 if (Time.timeScale == 0)
