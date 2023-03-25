@@ -11,6 +11,9 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
 
     [SerializeField] private GameObject playerPrefab;
+    private GameObject player;
+
+    private CinemachineVirtualCamera vCamPrefab;
     private CinemachineVirtualCamera vCam;
     
     [SerializeField] private Slider volumeSlider;
@@ -23,7 +26,14 @@ public class OptionsMenu : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        vCam = playerPrefab.transform.GetChild(3).GetComponent<CinemachineVirtualCamera>();
+        player = GameObject.Find("Player");
+        
+        if (player)
+        {
+            vCam = player.transform.GetChild(3).GetComponent<CinemachineVirtualCamera>();
+        }
+
+        vCamPrefab = playerPrefab.transform.GetChild(3).GetComponent<CinemachineVirtualCamera>();
     }
     
     // Start is called before the first frame update
@@ -52,7 +62,12 @@ public class OptionsMenu : MonoBehaviour
 
         PlayerPrefs.SetInt("FOV", ((int)fov));
 
-        vCam.m_Lens.FieldOfView = fov+80;
+        if (vCam)
+        {
+            vCam.m_Lens.FieldOfView = fov+80;
+        }
+
+        vCamPrefab.m_Lens.FieldOfView = fov+80;
     }
 
     public void SetMouseSensitivity(float sens)
