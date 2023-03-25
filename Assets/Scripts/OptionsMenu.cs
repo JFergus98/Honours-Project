@@ -23,6 +23,10 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] private Slider sensSlider;
     [SerializeField] private TextMeshProUGUI sensText;
 
+    [SerializeField] private Toggle invertVerticalCameraToggle;
+    [SerializeField] private Toggle invertHorizontalCameraToggle;
+
+
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
@@ -43,9 +47,9 @@ public class OptionsMenu : MonoBehaviour
 
         volumeSlider.value = PlayerPrefs.GetInt("MasterVolume");
         fovSlider.value = PlayerPrefs.GetInt("FOV");
-        sensSlider.value = PlayerPrefs.GetFloat("MouseSensitivity")*100;
-
-        Debug.Log(PlayerPrefs.GetFloat("MouseSensitivity")*100); // Testing
+        sensSlider.value = PlayerPrefs.GetFloat("MouseSensitivity")*200;
+        invertVerticalCameraToggle.isOn = (PlayerPrefs.GetInt("InvertVerticalCamera") == 1);
+        invertHorizontalCameraToggle.isOn = (PlayerPrefs.GetInt("InvertHorizontalCamera") == 1);
     }
 
     public void SetVolume(float volume)
@@ -74,8 +78,18 @@ public class OptionsMenu : MonoBehaviour
     {
         sensText.text = (sens+50).ToString();
 
-        PlayerPrefs.SetFloat("MouseSensitivity", (sens/100));
+        PlayerPrefs.SetFloat("MouseSensitivity", (sens/200));
 
         //Debug.Log(PlayerPrefs.GetFloat("MouseSensitivity")); // Testing
+    }
+
+    public void SetInvertVerticalCamera(bool isInverted)
+    {
+        PlayerPrefs.SetInt("InvertVerticalCamera", (isInverted ? 1 : 0));
+    }
+
+    public void SetInvertHorizontalCamera(bool isInverted)
+    {
+        PlayerPrefs.SetInt("InvertHorizontalCamera", (isInverted ? 1 : 0));
     }
 }
