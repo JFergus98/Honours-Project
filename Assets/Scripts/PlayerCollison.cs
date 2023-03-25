@@ -12,7 +12,8 @@ public class PlayerCollison : MonoBehaviour
         {    
             Debug.Log(collision.collider.name);
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
         }
     }
 
@@ -34,7 +35,8 @@ public class PlayerCollison : MonoBehaviour
         {    
             Debug.Log(collider.name);
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
         }
     }
 }
