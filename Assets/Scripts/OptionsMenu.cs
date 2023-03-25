@@ -10,7 +10,7 @@ public class OptionsMenu : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
 
-    [SerializeField] private GameObject PlayerPrefab;
+    [SerializeField] private GameObject playerPrefab;
     private CinemachineVirtualCamera vCam;
     
     [SerializeField] private Slider volumeSlider;
@@ -23,7 +23,7 @@ public class OptionsMenu : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        vCam = PlayerPrefab.transform.GetChild(3).GetComponent<CinemachineVirtualCamera>();
+        vCam = playerPrefab.transform.GetChild(3).GetComponent<CinemachineVirtualCamera>();
     }
     
     // Start is called before the first frame update
