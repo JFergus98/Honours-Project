@@ -22,11 +22,33 @@ public class MainMenu : MonoBehaviour
         mainMenuButton = mainMenu.transform.GetChild(0).gameObject;
         optionsButton = optionsMenu.transform.GetChild(0).gameObject;
         levelSelectButton = levelSelectMenu.transform.GetChild(0).GetChild(0).gameObject;
+
+        GameObject inputManager = GameObject.Find("InputManager");
+        GameObject loopCounter = GameObject.Find("LoopCounter");
+
+        Debug.Log(inputManager);
+        Debug.Log(loopCounter);
+
+        if (inputManager)
+        {
+            Destroy(inputManager);
+        }
+
+        if (loopCounter)
+        {
+            Destroy(loopCounter);
+        }
+    }
+
+    private void Update(){
+        
+            Destroy(GameObject.Find("InputManager"));
     }
 
     // Start is called before the first frame update
     private void Start()
     {
+        mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         levelSelectMenu.SetActive(false);
 
@@ -69,10 +91,11 @@ public class MainMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(mainMenuButton);
     }
 
-    public void LoadLevel(string name)
+    public void LoadLevel(int index)
     {
         ghostScrObj.ghosts.Clear();
         seedScrObj.GenerateSeed();
-        SceneManager.LoadScene(name);
+        SceneManager.LoadScene(index, LoadSceneMode.Single);
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);
     }
 }
