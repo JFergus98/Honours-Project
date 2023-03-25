@@ -8,6 +8,8 @@ using TMPro;
 public class PauseMenu : MonoBehaviour
 {
     private InputManager inputManager;
+    private LoopCounter loopCounter;
+
     [SerializeField]private GameObject background;
     [SerializeField]private GameObject pauseMenu;
     [SerializeField]private GameObject optionsMenu;
@@ -29,6 +31,7 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         inputManager = InputManager.Instance;
+        loopCounter = LoopCounter.Instance;
 
         background.SetActive(false);
         pauseMenu.SetActive(false);
@@ -36,6 +39,8 @@ public class PauseMenu : MonoBehaviour
 
         // Set time to 0
         time = 0;
+
+        loopCounter.incrementLoopCount();
     }
 
     // Update is called once per frame
