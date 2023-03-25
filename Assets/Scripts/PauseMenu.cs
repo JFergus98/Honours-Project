@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -10,30 +11,36 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]private GameObject background;
     [SerializeField]private GameObject pauseMenu;
     [SerializeField]private GameObject optionsMenu;
+    [SerializeField]private TextMeshProUGUI timer;
     
     private GameObject pauseMenuButton;
     private GameObject optionsButton;
+
+    private float time;
 
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
         pauseMenuButton = pauseMenu.transform.GetChild(1).gameObject;
-        optionsButton = optionsMenu.transform.GetChild(0).gameObject;
+        optionsButton = optionsMenu.transform.GetChild(1).GetChild(1).gameObject;
     }
 
     // Start is called before the first frame update
     private void Start()
     {
         inputManager = InputManager.Instance;
+
         background.SetActive(false);
         pauseMenu.SetActive(false);
-        optionsMenu.SetActive(false);    
+        optionsMenu.SetActive(false);
+
+        // Set time to 0
+        time = 0;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        Debug.Log("esc");
         if (inputManager.Pause())
         {
             if (background.activeInHierarchy)
@@ -46,7 +53,12 @@ public class PauseMenu : MonoBehaviour
                 Debug.Log("pause");
                 PauseGame();
             }
-        } 
+        }
+
+        // Increment time
+        time += Time.deltaTime;
+
+        timer.text = (time).ToString("00.00");
     }
     
     public void ResumeGame()
