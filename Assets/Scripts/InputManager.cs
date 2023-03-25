@@ -17,6 +17,8 @@ public sealed class InputManager : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
+        playerInputActions = new PlayerInputActions();
+        
         // If there is already an instance, then delete self;
         if (_instance != null && _instance != this) {
             Debug.Log("An instance of InputManager already exists in the scene.");
@@ -26,8 +28,6 @@ public sealed class InputManager : MonoBehaviour
             _instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-
-        playerInputActions = new PlayerInputActions();
 
         // Lock cursor to middle of screen and hide it
         Cursor.lockState = CursorLockMode.Locked;
