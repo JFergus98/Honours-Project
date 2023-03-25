@@ -19,15 +19,12 @@ public class MainMenu : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        mainMenuButton = mainMenu.transform.GetChild(0).gameObject;
-        optionsButton = optionsMenu.transform.GetChild(0).GetChild(1).gameObject;
-        levelSelectButton = levelSelectMenu.transform.GetChild(0).GetChild(0).gameObject;
+        mainMenuButton = mainMenu.transform.GetChild(1).gameObject;
+        optionsButton = optionsMenu.transform.GetChild(1).GetChild(1).gameObject;
+        levelSelectButton = levelSelectMenu.transform.GetChild(1).GetChild(0).gameObject;
 
         GameObject inputManager = GameObject.Find("InputManager");
         GameObject loopCounter = GameObject.Find("LoopCounter");
-
-        Debug.Log(inputManager);
-        Debug.Log(loopCounter);
 
         if (inputManager)
         {
