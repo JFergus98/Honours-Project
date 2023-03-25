@@ -44,16 +44,21 @@ public class OptionsMenu : MonoBehaviour
     private void Start()
     {
         //PlayerPrefs.DeleteAll();
-
+        
         volumeSlider.value = PlayerPrefs.GetInt("MasterVolume");
         fovSlider.value = PlayerPrefs.GetInt("FOV");
-        sensSlider.value = PlayerPrefs.GetFloat("MouseSensitivity")*200;
+        sensSlider.value = PlayerPrefs.GetFloat("MouseSensitivity")*400;
         invertVerticalCameraToggle.isOn = (PlayerPrefs.GetInt("InvertVerticalCamera") == 1);
         invertHorizontalCameraToggle.isOn = (PlayerPrefs.GetInt("InvertHorizontalCamera") == 1);
     }
 
     public void SetVolume(float volume)
     {
+        if (!this.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+        
         audioMixer.SetFloat("Master Volume", volume);
         volumeText.text = ((volume+80)).ToString();
 
@@ -62,34 +67,55 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetFOV(float fov)
     {
-        fovText.text = (fov+80).ToString();
+        if (!this.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+        
+        fovText.text = (fov).ToString();
 
         PlayerPrefs.SetInt("FOV", ((int)fov));
 
         if (vCam)
         {
-            vCam.m_Lens.FieldOfView = fov+80;
+            vCam.m_Lens.FieldOfView = fov;
         }
-
-        vCamPrefab.m_Lens.FieldOfView = fov+80;
+        
+        if (vCamPrefab)
+        {
+            vCamPrefab.m_Lens.FieldOfView = fov;
+        }
     }
 
     public void SetMouseSensitivity(float sens)
     {
-        sensText.text = (sens+50).ToString();
+        if (!this.gameObject.activeInHierarchy)
+        {
+            return;
+        }
 
-        PlayerPrefs.SetFloat("MouseSensitivity", (sens/200));
+        sensText.text = (sens).ToString();
 
-        //Debug.Log(PlayerPrefs.GetFloat("MouseSensitivity")); // Testing
+        PlayerPrefs.SetFloat("MouseSensitivity", (sens/400));
     }
 
     public void SetInvertVerticalCamera(bool isInverted)
     {
+        if (!this.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
         PlayerPrefs.SetInt("InvertVerticalCamera", (isInverted ? 1 : 0));
     }
 
     public void SetInvertHorizontalCamera(bool isInverted)
     {
+        if (!this.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
         PlayerPrefs.SetInt("InvertHorizontalCamera", (isInverted ? 1 : 0));
     }
 }
