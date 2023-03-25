@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         mainMenuButton = mainMenu.transform.GetChild(0).gameObject;
-        optionsButton = optionsMenu.transform.GetChild(0).gameObject;
+        optionsButton = optionsMenu.transform.GetChild(0).GetChild(1).gameObject;
         levelSelectButton = levelSelectMenu.transform.GetChild(0).GetChild(0).gameObject;
 
         GameObject inputManager = GameObject.Find("InputManager");
@@ -38,11 +38,6 @@ public class MainMenu : MonoBehaviour
         {
             Destroy(loopCounter);
         }
-    }
-
-    private void Update(){
-        
-            Destroy(GameObject.Find("InputManager"));
     }
 
     // Start is called before the first frame update
