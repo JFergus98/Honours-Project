@@ -22,8 +22,9 @@ public class CinemachinePOVExtension : CinemachineExtension
     {
         if (vcam.Follow)
         {
-            if( stage == CinemachineCore.Stage.Aim)
+            if(stage == CinemachineCore.Stage.Aim)
             {
+                // If camera rotation is null, then set initial rotation
                 if (camRotation == null)
                 {
                     camRotation = transform.localRotation.eulerAngles;
@@ -32,15 +33,34 @@ public class CinemachinePOVExtension : CinemachineExtension
                 // Get mouse input
                 Vector2 mouseInput = inputManager.GetPlayerMouseMovement();
 
-                sensitivity = PlayerPrefs.GetFloat("MouseSensitivity") + 0.5f;
+                // Set sensivity to stored value
+                sensitivity = PlayerPrefs.GetFloat("MouseSensitivity") + 0.25f;
 
+                // If game is paused, then disable mouse look by setting sensitivity to 0
                 if (Time.timeScale == 0)
                 {
                     sensitivity = 0;
                 }
+
+                // Set horizontal and vertical sensitivity to the sensitivity
+                float horizontalSensitivity = sensitivity;
+                float verticalSensitivity = sensitivity;
+
+                // If horizontal invert camera is enabled, then invert horizontal sensitivity
+                if (PlayerPrefs.GetInt("InvertHorizontalCamera") == 1)
+                {
+                    horizontalSensitivity = -Mathf.Abs(horizontalSensitivity);
+                }
                 
-                camRotation.x += mouseInput.x * sensitivity;
-                camRotation.y += mouseInput.y * sensitivity;
+                // If vertical invert camera is enabled, then invert vertical sensitivity
+                if (PlayerPrefs.GetInt("InvertVerticalCamera") == 1)
+                {
+                    verticalSensitivity = -Mathf.Abs(verticalSensitivity);
+                }
+
+                // Set the camera rotation to mouse input multiplied by the sensitivity
+                camRotation.x += mouseInput.x * horizontalSensitivity;
+                camRotation.y += mouseInput.y * verticalSensitivity;
 
                 // Clamp the vertival viewing angle
                 camRotation.y = Mathf.Clamp(camRotation.y, -verticalClampAngle, verticalClampAngle);
