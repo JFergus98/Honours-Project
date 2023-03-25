@@ -19,12 +19,12 @@ public sealed class InputManager : MonoBehaviour
     {
         // If there is already an instance, then delete self;
         if (_instance != null && _instance != this) {
-            Debug.LogError("An instance of InputManager already exists in the scene.");
+            Debug.Log("An instance of InputManager already exists in the scene.");
             Destroy(this.gameObject);
         }
         else {
             _instance = this;
-            //DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
 
         playerInputActions = new PlayerInputActions();
