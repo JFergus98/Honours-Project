@@ -18,15 +18,26 @@ public class CinemachinePOVExtension : CinemachineExtension
         base.Awake();
     }
 
-    protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state , float deltaTime) {
-        if (vcam.Follow) {
-            if( stage == CinemachineCore.Stage.Aim) {
-                if (camRotation == null) camRotation = transform.localRotation.eulerAngles;
-                
+    protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state , float deltaTime)
+    {
+        if (vcam.Follow)
+        {
+            if( stage == CinemachineCore.Stage.Aim)
+            {
+                if (camRotation == null)
+                {
+                    camRotation = transform.localRotation.eulerAngles;
+                }
+
                 // Get mouse input
                 Vector2 mouseInput = inputManager.GetPlayerMouseMovement();
 
                 sensitivity = PlayerPrefs.GetFloat("MouseSensitivity") + 0.5f;
+
+                if (Time.timeScale == 0)
+                {
+                    sensitivity = 0;
+                }
                 
                 camRotation.x += mouseInput.x * sensitivity;
                 camRotation.y += mouseInput.y * sensitivity;
@@ -42,6 +53,4 @@ public class CinemachinePOVExtension : CinemachineExtension
             }
         }
     }
-
-    
 }
