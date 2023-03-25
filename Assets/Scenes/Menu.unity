@@ -6998,7 +6998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: aee1b0b1cf4a8924786ec124d466f9ba, type: 2}
-  PlayerPrefab: {fileID: 3878747498598835916, guid: 3ad618fa5a3ac094295d2bb2110052d5, type: 3}
+  playerPrefab: {fileID: 3878747498598835916, guid: 3ad618fa5a3ac094295d2bb2110052d5, type: 3}
   volumeSlider: {fileID: 2088601518}
   volumeText: {fileID: 1999961325}
   fovSlider: {fileID: 411373713}
