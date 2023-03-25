@@ -11,7 +11,7 @@ public sealed class LoopCounter : MonoBehaviour
             return _instance;
         }
     }
-    private int loopCount;
+    [SerializeField] private int loopCount;
 
     // Awake is called when the script instance is being loaded
     private void Awake()
@@ -30,12 +30,11 @@ public sealed class LoopCounter : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        loopCount++;
+        loopCount = 0;
     }
 
-    // Update is called once per frame
-    private void Update()
+    public void incrementLoopCount()
     {
-        
+        loopCount++;
     }
 }
