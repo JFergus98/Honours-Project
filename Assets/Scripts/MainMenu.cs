@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]private GhostScriptableObject ghostScrObj;
@@ -12,16 +13,29 @@ public class MainMenu : MonoBehaviour
     [SerializeField]private GameObject optionsMenu;
     [SerializeField]private GameObject levelSelectMenu;
 
-    private GameObject mainMenuButton;
-    private GameObject optionsButton;
-    private GameObject levelSelectButton;
+    private GameObject firstMenuButton;
+    private GameObject firstOptionsButton;
+    private GameObject firstLevelSelectButton;
 
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        mainMenuButton = mainMenu.transform.GetChild(1).gameObject;
-        optionsButton = optionsMenu.transform.GetChild(1).GetChild(1).gameObject;
-        levelSelectButton = levelSelectMenu.transform.GetChild(1).GetChild(0).gameObject;
+        firstMenuButton = mainMenu.transform.GetChild(1).gameObject;
+        firstOptionsButton = optionsMenu.transform.GetChild(1).GetChild(1).gameObject;
+        firstLevelSelectButton = levelSelectMenu.transform.GetChild(1).GetChild(0).gameObject;
+
+        Button[] levelSelectButtons = levelSelectMenu.transform.GetChild(1).gameObject.GetComponentsInChildren<Button>();
+
+        for (int i = 0; i < levelSelectButtons.Length; i++)
+        {
+            Button levelSelectButton = levelSelectButtons[i];
+            if (i <= PlayerPrefs.GetInt("CompletedLevels")+10)
+            {
+                levelSelectButton.interactable = true;
+            }else{
+                levelSelectButton.interactable = false;
+            }
+        }
 
         GameObject inputManager = GameObject.Find("InputManager");
         GameObject loopCounter = GameObject.Find("LoopCounter");
@@ -45,7 +59,7 @@ public class MainMenu : MonoBehaviour
         levelSelectMenu.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(mainMenuButton);
+        EventSystem.current.SetSelectedGameObject(firstMenuButton);
     }
     
     public void Play()
@@ -54,7 +68,7 @@ public class MainMenu : MonoBehaviour
         levelSelectMenu.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(levelSelectButton);
+        EventSystem.current.SetSelectedGameObject(firstLevelSelectButton);
     }
 
     public void Options()
@@ -63,7 +77,7 @@ public class MainMenu : MonoBehaviour
         optionsMenu.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(optionsButton);
+        EventSystem.current.SetSelectedGameObject(firstOptionsButton);
     }
 
     public void Quit()
@@ -80,7 +94,7 @@ public class MainMenu : MonoBehaviour
         mainMenu.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(mainMenuButton);
+        EventSystem.current.SetSelectedGameObject(firstMenuButton);
     }
 
     public void LoadLevel(int index)
