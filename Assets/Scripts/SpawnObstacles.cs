@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class SpawnObstacles : MonoBehaviour
 {
-    [SerializeField]private SeedScriptableObject seedScrObj;
-    [SerializeField]private float minTime = 0.1f;
-    [SerializeField]private float maxTime = 5.0f;
-    [SerializeField]private List<Spawner> spawnerList = new List<Spawner>();
+    [SerializeField]
+    private SeedScriptableObject seedScrObj;
+    [SerializeField]
+    private float minTime = 0.1f;
+    [SerializeField]
+    private float maxTime = 5.0f;
+    [SerializeField]
+    private List<Spawner> spawnerList = new List<Spawner>();
 
     // Awake is called when the script instance is being loaded
     private void Awake()
