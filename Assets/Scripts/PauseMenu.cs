@@ -10,10 +10,14 @@ public class PauseMenu : MonoBehaviour
     private InputManager inputManager;
     private LoopCounter loopCounter;
 
-    [SerializeField]private GameObject background;
-    [SerializeField]private GameObject pauseMenu;
-    [SerializeField]private GameObject optionsMenu;
-    [SerializeField]private TextMeshProUGUI timer;
+    [SerializeField]
+    private GameObject background;
+    [SerializeField]
+    private GameObject pauseMenu;
+    [SerializeField]
+    private GameObject optionsMenu;
+    [SerializeField]
+    private TextMeshProUGUI timer;
     
     private GameObject pauseMenuButton;
     private GameObject optionsButton;
