@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GhostRecorder : MonoBehaviour
 {
-    [SerializeField] private GhostScriptableObject ghostScrObj;
+    [SerializeField]
+    private GhostScriptableObject ghostScrObj;
 
     private bool record;
     private int index;
