@@ -6,12 +6,17 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField]private GhostScriptableObject ghostScrObj;
-    [SerializeField]private SeedScriptableObject seedScrObj;
+    [SerializeField]
+    private GhostScriptableObject ghostScrObj;
+    [SerializeField]
+    private SeedScriptableObject seedScrObj;
 
-    [SerializeField]private GameObject mainMenu;
-    [SerializeField]private GameObject optionsMenu;
-    [SerializeField]private GameObject levelSelectMenu;
+    [SerializeField]
+    private GameObject mainMenu;
+    [SerializeField]
+    private GameObject optionsMenu;
+    [SerializeField]
+    private GameObject levelSelectMenu;
 
     private GameObject firstMenuButton;
     private GameObject firstOptionsButton;
