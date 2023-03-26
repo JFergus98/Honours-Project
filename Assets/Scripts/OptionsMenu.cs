@@ -8,23 +8,33 @@ using Cinemachine;
 
 public class OptionsMenu : MonoBehaviour
 {
-    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField]
+    private AudioMixer audioMixer;
 
-    [SerializeField] private GameObject playerPrefab;
+    [SerializeField]
+    private GameObject playerPrefab;
     private GameObject player;
 
     private CinemachineVirtualCamera vCamPrefab;
     private CinemachineVirtualCamera vCam;
     
-    [SerializeField] private Slider volumeSlider;
-    [SerializeField] private TextMeshProUGUI volumeText;
-    [SerializeField] private Slider fovSlider;
-    [SerializeField] private TextMeshProUGUI fovText;
-    [SerializeField] private Slider sensSlider;
-    [SerializeField] private TextMeshProUGUI sensText;
+    [SerializeField]
+    private Slider volumeSlider;
+    [SerializeField]
+    private TextMeshProUGUI volumeText;
+    [SerializeField]
+    private Slider fovSlider;
+    [SerializeField]
+    private TextMeshProUGUI fovText;
+    [SerializeField]
+    private Slider sensSlider;
+    [SerializeField]
+    private TextMeshProUGUI sensText;
 
-    [SerializeField] private Toggle invertVerticalCameraToggle;
-    [SerializeField] private Toggle invertHorizontalCameraToggle;
+    [SerializeField]
+    private Toggle invertVerticalCameraToggle;
+    [SerializeField]
+    private Toggle invertHorizontalCameraToggle;
 
 
     // Awake is called when the script instance is being loaded
