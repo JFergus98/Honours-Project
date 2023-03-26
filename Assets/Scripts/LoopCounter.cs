@@ -11,7 +11,7 @@ public sealed class LoopCounter : MonoBehaviour
             return _instance;
         }
     }
-    [SerializeField] private int loopCount;
+    [SerializeField] public int loopCount { get; private set; }
 
     // Awake is called when the script instance is being loaded
     private void Awake()
