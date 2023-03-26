@@ -106,6 +106,7 @@ public class MainMenu : MonoBehaviour
     {
         ghostScrObj.ghosts.Clear();
         seedScrObj.GenerateSeed();
+        
         SceneManager.LoadScene(index, LoadSceneMode.Single);
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
     }
