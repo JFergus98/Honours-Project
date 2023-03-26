@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GhostPlayer : MonoBehaviour
 {
-    [SerializeField] private GhostScriptableObject ghostScrObj;
-    [SerializeField] private GameObject ghostPrefab;
+    [SerializeField]
+    private GhostScriptableObject ghostScrObj;
+    [SerializeField]
+    private GameObject ghostPrefab;
 
     private List<GameObject> ghostObjects;
     private List<int> indexs;
