@@ -11,24 +11,42 @@ public class PauseMenu : MonoBehaviour
     private LoopCounter loopCounter;
 
     [SerializeField]
+    private GhostScriptableObject ghostScrObj;
+    [SerializeField]
+    private SeedScriptableObject seedScrObj;
+
+    [SerializeField]
     private GameObject background;
     [SerializeField]
     private GameObject pauseMenu;
     [SerializeField]
     private GameObject optionsMenu;
     [SerializeField]
+    private GameObject levelCompletedMenu;
+    [SerializeField]
     private TextMeshProUGUI timer;
     
-    private GameObject pauseMenuButton;
-    private GameObject optionsButton;
+    [SerializeField]
+    private GameObject firstPauseMenuButton;
+    [SerializeField]
+    private GameObject firstOptionsButton;
+    [SerializeField]
+    private GameObject firstLevelCompletedButton;
+
+    [SerializeField]
+    private TextMeshProUGUI loopValue;
+    [SerializeField]
+    private TextMeshProUGUI timeValue;
 
     private float time;
 
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        pauseMenuButton = pauseMenu.transform.GetChild(1).gameObject;
-        optionsButton = optionsMenu.transform.GetChild(1).GetChild(1).gameObject;
+        background.SetActive(false);
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        levelCompletedMenu.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -36,10 +54,6 @@ public class PauseMenu : MonoBehaviour
     {
         inputManager = InputManager.Instance;
         loopCounter = LoopCounter.Instance;
-
-        background.SetActive(false);
-        pauseMenu.SetActive(false);
-        optionsMenu.SetActive(false);
 
         // Set time to 0
         time = 0;
@@ -50,7 +64,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (inputManager.Pause())
+        if (inputManager.Pause() && !levelCompletedMenu.activeInHierarchy)
         {
             if (background.activeInHierarchy)
             {
@@ -68,6 +82,8 @@ public class PauseMenu : MonoBehaviour
         time += Time.deltaTime;
 
         timer.text = (time).ToString("00.00");
+        timeValue.text = (time).ToString("00.00");
+        loopValue.text = loopCounter.loopCount.ToString();
     }
     
     public void ResumeGame()
@@ -93,7 +109,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
 
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(pauseMenuButton);
+        EventSystem.current.SetSelectedGameObject(firstPauseMenuButton);
     }
 
     public void RestartLevel()
@@ -110,7 +126,7 @@ public class PauseMenu : MonoBehaviour
         optionsMenu.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(optionsButton);
+        EventSystem.current.SetSelectedGameObject(firstOptionsButton);
     }
 
     public void ReturnToMenu()
@@ -133,6 +149,55 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(pauseMenuButton);
+        EventSystem.current.SetSelectedGameObject(firstPauseMenuButton);
+    }
+
+    public void NextLevel()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (index > SceneManager.sceneCountInBuildSettings)
+        {
+            ReturnToMenu();
+        }
+
+        LoadLevel(index);
+    }
+
+    public void ReloadLevel()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex;
+
+        LoadLevel(index);
+    }
+
+    private void LoadLevel(int index)
+    {
+        Destroy(inputManager);
+        Destroy(loopCounter);
+
+        ghostScrObj.ghosts.Clear();
+        seedScrObj.GenerateSeed();
+
+        SceneManager.LoadScene(index, LoadSceneMode.Single);
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+
+        Time.timeScale = 1;
+    }
+
+    public void LevelCompleted()
+    {
+        Time.timeScale = 0;
+
+        background.SetActive(true);
+        optionsMenu.SetActive(false);
+        pauseMenu.SetActive(false);
+        levelCompletedMenu.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstLevelCompletedButton);
     }
 }
