@@ -5,6 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class PlayerCollison : MonoBehaviour
 {
+    private PauseMenu pauseMenu;
+
+    private void Start()
+    {
+        pauseMenu = GameObject.Find("PauseMenuCanvas").GetComponent<PauseMenu>();
+
+        Debug.Log("pauseMenu " + pauseMenu);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         // If player collider collides with an Obstacle, then restart level
@@ -17,20 +26,20 @@ public class PlayerCollison : MonoBehaviour
         }
     }
 
-    // private void OnTriggerEnter(Collider collider)
-    // {
-    //     // If player collider collides with an Obstacle, then restart level
-    //     if (collider.CompareTag("Obstacle"))
-    //     {    
-    //         Debug.Log(collider.name);
+    private void OnTriggerEnter(Collider collider)
+    {
+        // If player collider enters the Finish Bounds, then end Level
+        if (collider.CompareTag("FinishBounds"))
+        {    
+            Debug.Log(collider.name);
 
-    //         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    //     }
-    // }
+            pauseMenu.LevelCompleted();
+        }
+    }
 
     private void OnTriggerExit(Collider collider)
     {
-        // If player collider exits PlayerBounds, then restart level
+        // If player collider exits the Player Bounds, then restart level
         if (collider.CompareTag("PlayerBounds"))
         {    
             Debug.Log(collider.name);
