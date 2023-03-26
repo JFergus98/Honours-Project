@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class SpawnFakePlatforms : MonoBehaviour
 {
-    [SerializeField]private SeedScriptableObject seedScrObj;
+    [SerializeField]
+    private SeedScriptableObject seedScrObj;
 
-    [SerializeField]private int NoOfRows;
-    [SerializeField]private List<PlatformRow> platformList = new List<PlatformRow>();
+    [SerializeField]
+    private int NoOfRows;
+    [SerializeField]
+    private List<PlatformRow> platformList = new List<PlatformRow>();
 
     // Awake is called when the script instance is being loaded
     private void Awake()
