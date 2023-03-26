@@ -4,30 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector3 wallNormal;
-    //sphercast
-    // public float sphereRadius = 0.3f;
-    // public float sphereCastDistance = 1.6f;
-
-    // //boxcast
-    // public Vector3 boxSize;
-    // public Vector3 gizmoBoxSize;
-    // public float maxDistance;
-
-    // [SerializeField]private BoxCollider boxCollider;
-
-    [SerializeField]private LayerMask groundLayerMask;
+    [SerializeField]
+    private LayerMask groundLayerMask;
     private InputManager inputManager;
     private Rigidbody playerRb;
     private Transform groundCheck;
     private Transform orientation;
-    Vector2 moveInput;
-    [SerializeField]private float speed = 50f;
-    [SerializeField]private float maxSpeed = 7f;
+    private Vector2 moveInput;
+
+    private const float speed = 50f;
+    private const float maxSpeed = 7f;
     private const float frictionForce = 0.2f;
     private const float groundCheckRadius = 0.45f;
 
-    [SerializeField]private float jumpForce  = 5.56f;
+    private const float jumpForce  = 5.56f;
     private bool isJumping;
 
     private const float coyoteTime = 0.2f;
@@ -38,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private float jumpDelayTimer = 0;
 
     private RaycastHit hitInfo;
+
+    private Vector3 wallNormal;
 
     //private float maxSlopeAngle = 40;
 
