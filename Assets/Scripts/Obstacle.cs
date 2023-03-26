@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    [SerializeField]private sbyte direction = 1;
-    [SerializeField]private float speed = 30.0f;
+    [SerializeField]
+    private sbyte direction = 1;
+    [SerializeField]
+    private float speed = 30.0f;
     //[SerializeField]private float outOfBounds = 11.5f;
     private Rigidbody rb;
 
