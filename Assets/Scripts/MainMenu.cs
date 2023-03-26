@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour
         for (int i = 0; i < levelSelectButtons.Length; i++)
         {
             Button levelSelectButton = levelSelectButtons[i];
-            if (i <= PlayerPrefs.GetInt("CompletedLevels")+10)
+            if (i <= PlayerPrefs.GetInt("CompletedLevels"))
             {
                 levelSelectButton.interactable = true;
             }else{
