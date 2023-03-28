@@ -36,6 +36,8 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     private Toggle invertHorizontalCameraToggle;
 
+    private const int defaultFOV = 80;
+    private const float defaultMouseSensitivity = 0.125f;
 
     // Awake is called when the script instance is being loaded
     private void Awake()
@@ -48,6 +50,8 @@ public class OptionsMenu : MonoBehaviour
         }
 
         vCamPrefab = playerPrefab.transform.GetChild(3).GetComponent<CinemachineVirtualCamera>();
+
+        checkSetDefaultSetting();
     }
     
     // Start is called before the first frame update
@@ -60,6 +64,19 @@ public class OptionsMenu : MonoBehaviour
         sensSlider.value = PlayerPrefs.GetFloat("MouseSensitivity")*400;
         invertVerticalCameraToggle.isOn = (PlayerPrefs.GetInt("InvertVerticalCamera") == 1);
         invertHorizontalCameraToggle.isOn = (PlayerPrefs.GetInt("InvertHorizontalCamera") == 1);
+    }
+
+    private void checkSetDefaultSetting()
+    {
+        if (PlayerPrefs.GetInt("FOV") == 0)
+        {
+            PlayerPrefs.SetInt("FOV", defaultFOV);
+        }
+
+        if (PlayerPrefs.GetFloat("MouseSensitivity") == 0)
+        {
+            PlayerPrefs.SetFloat("MouseSensitivity", defaultMouseSensitivity);
+        }
     }
 
     public void SetVolume(float volume)
