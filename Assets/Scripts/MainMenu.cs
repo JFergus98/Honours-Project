@@ -18,17 +18,16 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private GameObject levelSelectMenu;
 
+    [SerializeField]
     private GameObject firstMenuButton;
+    [SerializeField]
     private GameObject firstOptionsButton;
+    [SerializeField]
     private GameObject firstLevelSelectButton;
 
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        firstMenuButton = mainMenu.transform.GetChild(1).gameObject;
-        firstOptionsButton = optionsMenu.transform.GetChild(1).GetChild(1).gameObject;
-        firstLevelSelectButton = levelSelectMenu.transform.GetChild(2).GetChild(0).gameObject;
-
         Image[] levelCompletedImages = levelSelectMenu.transform.GetChild(1).gameObject.GetComponentsInChildren<Image>();
 
         for (int i = 0; i < levelCompletedImages.Length; i++)
