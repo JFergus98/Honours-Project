@@ -16,16 +16,12 @@ public sealed class InputManager : MonoBehaviour
 
     private PlayerInputActions playerInputActions;
 
-
-
     private PlayerInput playerInput;
 
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-
         playerInput = GetComponent<PlayerInput>();
-
 
         playerInputActions = new PlayerInputActions();
         
@@ -61,14 +57,12 @@ public sealed class InputManager : MonoBehaviour
     {
         return playerInput.actions["Movement"].ReadValue<Vector2>();
 
-        return playerInputActions.Player.Movement.ReadValue<Vector2>();
+        // return playerInputActions.Player.Movement.ReadValue<Vector2>();
     }
 
     // Returns the value of the mouse movement
     public Vector2 GetPlayerMouseMovement()
     {
-        //return playerInput.actions["Look"].ReadValue<Vector2>();
-
         return playerInputActions.Player.Look.ReadValue<Vector2>();
     }
 
@@ -77,7 +71,7 @@ public sealed class InputManager : MonoBehaviour
     {
         return playerInput.actions["Jump"].triggered;
 
-        return playerInputActions.Player.Jump.triggered;
+        // return playerInputActions.Player.Jump.triggered;
     }
 
     // Returns true if Pause button is pressed
