@@ -27,18 +27,19 @@ public class MainMenu : MonoBehaviour
     {
         firstMenuButton = mainMenu.transform.GetChild(1).gameObject;
         firstOptionsButton = optionsMenu.transform.GetChild(1).GetChild(1).gameObject;
-        firstLevelSelectButton = levelSelectMenu.transform.GetChild(1).GetChild(0).gameObject;
+        firstLevelSelectButton = levelSelectMenu.transform.GetChild(2).GetChild(0).gameObject;
 
-        Button[] levelSelectButtons = levelSelectMenu.transform.GetChild(1).gameObject.GetComponentsInChildren<Button>();
+        Image[] levelCompletedImages = levelSelectMenu.transform.GetChild(1).gameObject.GetComponentsInChildren<Image>();
 
-        for (int i = 0; i < levelSelectButtons.Length; i++)
+        for (int i = 0; i < levelCompletedImages.Length; i++)
         {
-            Button levelSelectButton = levelSelectButtons[i];
-            if (i <= PlayerPrefs.GetInt("CompletedLevels"))
+            Image levelCompletedImage = levelCompletedImages[i];
+
+            if (PlayerPrefs.GetInt("CompletedLevel" + (i+1)) == 1)
             {
-                levelSelectButton.interactable = true;
+                levelCompletedImage.enabled = true;
             }else{
-                levelSelectButton.interactable = false;
+                levelCompletedImage.enabled = false;
             }
         }
 
