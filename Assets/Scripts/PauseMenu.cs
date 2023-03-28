@@ -189,10 +189,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 0;
 
-        if (SceneManager.GetActiveScene().buildIndex - 1 > PlayerPrefs.GetInt("CompletedLevels"))
-        {
-            PlayerPrefs.SetInt("CompletedLevels", SceneManager.GetActiveScene().buildIndex - 1);
-        }
+        PlayerPrefs.SetInt("CompletedLevel" + (SceneManager.GetActiveScene().buildIndex - 1), 1);
 
         background.SetActive(true);
         optionsMenu.SetActive(false);
