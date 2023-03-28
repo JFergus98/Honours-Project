@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
@@ -36,6 +37,16 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     private Toggle invertHorizontalCameraToggle;
 
+    [SerializeField]
+    private GameObject optionsMenu;
+    [SerializeField]
+    private GameObject customiseKeybindsMenu;
+
+    [SerializeField]
+    private GameObject firstOptionsButton;
+    [SerializeField]
+    private GameObject firstCustomiseKeybindsButton;
+
     private const int defaultFOV = 80;
     private const float defaultMouseSensitivity = 0.125f;
 
@@ -58,6 +69,9 @@ public class OptionsMenu : MonoBehaviour
     private void Start()
     {
         //PlayerPrefs.DeleteAll();
+
+        optionsMenu.SetActive(true);
+        customiseKeybindsMenu.SetActive(false);
         
         volumeSlider.value = PlayerPrefs.GetInt("MasterVolume");
         fovSlider.value = PlayerPrefs.GetInt("FOV");
@@ -144,5 +158,23 @@ public class OptionsMenu : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("InvertHorizontalCamera", (isInverted ? 1 : 0));
+    }
+
+    public void CustomizeKeyBindings()
+    {
+        optionsMenu.SetActive(false);
+        customiseKeybindsMenu.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstCustomiseKeybindsButton);
+    }
+
+    public void Back()
+    {
+        customiseKeybindsMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstOptionsButton);
     }
 }
