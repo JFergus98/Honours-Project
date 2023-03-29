@@ -47,12 +47,15 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     private GameObject firstCustomiseKeybindsButton;
 
+    private const float defaultMasterVolume = 1;
     private const int defaultFOV = 80;
     private const float defaultMouseSensitivity = 0.125f;
 
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
+        PlayerPrefs.DeleteAll();
+
         player = GameObject.Find("Player");
         
         if (player)
@@ -68,12 +71,10 @@ public class OptionsMenu : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        //PlayerPrefs.DeleteAll();
-
         optionsMenu.SetActive(true);
         customiseKeybindsMenu.SetActive(false);
         
-        volumeSlider.value = PlayerPrefs.GetInt("MasterVolume");
+        volumeSlider.value = PlayerPrefs.GetFloat("MasterVolume");
         fovSlider.value = PlayerPrefs.GetInt("FOV");
         sensSlider.value = PlayerPrefs.GetFloat("MouseSensitivity")*400;
         invertVerticalCameraToggle.isOn = (PlayerPrefs.GetInt("InvertVerticalCamera") == 1);
@@ -82,6 +83,11 @@ public class OptionsMenu : MonoBehaviour
 
     private void checkSetDefaultSetting()
     {
+        if (PlayerPrefs.GetFloat("MasterVolume") == 0)
+        {
+            PlayerPrefs.SetFloat("MasterVolume", defaultMasterVolume);
+        }
+
         if (PlayerPrefs.GetInt("FOV") == 0)
         {
             PlayerPrefs.SetInt("FOV", defaultFOV);
@@ -100,10 +106,10 @@ public class OptionsMenu : MonoBehaviour
             return;
         }
         
-        audioMixer.SetFloat("Master Volume", volume);
-        volumeText.text = ((volume+80)).ToString();
+        audioMixer.SetFloat("Master Volume", Mathf.Log10(volume) * 20);
+        volumeText.text = (volume*100).ToString("N0");
 
-        PlayerPrefs.SetInt("MasterVolume", ((int)volume));
+        PlayerPrefs.SetFloat("MasterVolume", volume);
     }
 
     public void SetFOV(float fov)
