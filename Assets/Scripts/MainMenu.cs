@@ -28,6 +28,13 @@ public class MainMenu : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
+        // PlayerPrefs.DeleteKey("Stage1CompletedLevels");
+        // PlayerPrefs.DeleteKey("Stage2CompletedLevels");
+
+        Debug.Log("Stage 1 levels completed " + PlayerPrefs.GetInt("Stage1CompletedLevels"));
+        Debug.Log("Stage 2 levels completed " + PlayerPrefs.GetInt("Stage2CompletedLevels"));
+
+
         Image[] levelCompletedImages = levelSelectMenu.transform.GetChild(1).gameObject.GetComponentsInChildren<Image>();
 
         for (int i = 0; i < levelCompletedImages.Length; i++)
@@ -40,6 +47,28 @@ public class MainMenu : MonoBehaviour
             }else{
                 levelCompletedImage.enabled = false;
             }
+        }
+
+        Button[] levelSelectButtons = levelSelectMenu.transform.GetChild(2).gameObject.GetComponentsInChildren<Button>();
+        
+        for (int i = 0; i < 12; i++)
+        {
+            Button levelSelectButton = levelSelectButtons[i];
+            if (i <= PlayerPrefs.GetInt("Stage1CompletedLevels"))
+            {
+                levelSelectButton.interactable = true;
+            }else{
+                levelSelectButton.interactable = false;
+            }
+
+            levelSelectButton = levelSelectButtons[i+12];
+            if (i <= PlayerPrefs.GetInt("Stage2CompletedLevels"))
+            {
+                levelSelectButton.interactable = true;
+            }else{
+                levelSelectButton.interactable = false;
+            }
+
         }
 
         GameObject inputManager = GameObject.Find("InputManager");
