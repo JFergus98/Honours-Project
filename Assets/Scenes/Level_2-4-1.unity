@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seedScrObj: {fileID: 11400000, guid: 6aa96652a4fd17d44b28af8665a44d1e, type: 2}
   minTime: 0.1
-  maxTime: 5
+  maxTime: 4
   spawnerList:
   - obstaclePrefab: {fileID: 2286291386467107743, guid: 16aebd78d94167541b284db5b1bf5513, type: 3}
     transform: {fileID: 147295057}
