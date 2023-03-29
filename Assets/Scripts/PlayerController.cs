@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private LayerMask groundLayerMask;
+    private AudioManager audioManager;
     private InputManager inputManager;
     private Rigidbody playerRb;
     private Transform groundCheck;
@@ -28,8 +29,9 @@ public class PlayerController : MonoBehaviour
     private float jumpDelayTimer = 0;
 
     private RaycastHit hitInfo;
-
     private Vector3 wallNormal;
+
+    private bool IsGroundedLastUpdate = true;
 
     //private float maxSlopeAngle = 40;
 
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour
    // Start is called before the first frame update
     private void Start()
     {
+        audioManager = AudioManager.Instance;
         inputManager = InputManager.Instance;
     }
 
@@ -127,6 +130,18 @@ public class PlayerController : MonoBehaviour
             Vector3 maxVelocity = groundVelocity.normalized * maxSpeed * wallMod;
             playerRb.velocity = new Vector3(maxVelocity.x, playerRb.velocity.y, maxVelocity.z);
         }
+        
+        // If player is grounded and moving, then play movement audio clip
+        if (IsGrounded() && Mathf.Abs(moveInput.magnitude) > 0.01f && !audioManager.isPlayingSound("Movement")) {
+            
+            audioManager.PlaySound("Movement");
+            Debug.Log("playing audio movement");
+        }
+
+        // If player is not grounded or moving, then stop movement audio clip
+        if ((!IsGrounded() || Mathf.Abs(moveInput.magnitude) < 0.01f) && audioManager.isPlayingSound("Movement")) {
+            Debug.Log("stoping audio movement");
+        }
 
         // If the player is not currently jumping and the coyote and jump buffer timers are positive, then the player jumps
         if (!isJumping && coyoteTimer > 0 && jumpBufferTimer > 0) {
@@ -136,6 +151,9 @@ public class PlayerController : MonoBehaviour
             playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
             // Apply upward force
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+            // Play jump audio clip
+            audioManager.PlaySound("JumpStart");
             
             // Reset timers
             jumpDelayTimer = jumpDelay;
@@ -150,6 +168,13 @@ public class PlayerController : MonoBehaviour
         }else{
             playerRb.useGravity = true;
         }
+
+        if (IsGrounded() && IsGroundedLastUpdate == false) {
+            audioManager.PlaySound("JumpLand");
+
+        }
+
+        IsGroundedLastUpdate = IsGrounded();
     }
 
     // Returns true if the player object is in contact with the ground
