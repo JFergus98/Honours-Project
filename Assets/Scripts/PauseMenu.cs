@@ -191,6 +191,16 @@ public class PauseMenu : MonoBehaviour
 
         PlayerPrefs.SetInt("CompletedLevel" + (SceneManager.GetActiveScene().buildIndex - 1), 1);
 
+        if (SceneManager.GetActiveScene().buildIndex - 13 > PlayerPrefs.GetInt("Stage2CompletedLevels"))
+        {
+            PlayerPrefs.SetInt("Stage2CompletedLevels", SceneManager.GetActiveScene().buildIndex - 13); // not working requires more testing
+        }
+
+        else if (SceneManager.GetActiveScene().buildIndex - 1 > PlayerPrefs.GetInt("Stage1CompletedLevels"))
+        {
+            PlayerPrefs.SetInt("Stage1CompletedLevels", SceneManager.GetActiveScene().buildIndex - 1); // not working requires more testing
+        }
+
         background.SetActive(true);
         optionsMenu.SetActive(false);
         pauseMenu.SetActive(false);
