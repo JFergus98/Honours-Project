@@ -29,6 +29,7 @@ public sealed class InputManager : MonoBehaviour
         if (_instance != null && _instance != this) {
             Debug.Log("An instance of InputManager already exists in the scene.");
             Destroy(this.gameObject);
+            return;
         }
         else {
             _instance = this;
