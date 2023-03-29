@@ -2554,7 +2554,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c2e0d3f88cb48f240af40a1f1bac7e8c, type: 3}
     <audioMixerGroup>k__BackingField: {fileID: 24300002, guid: aee1b0b1cf4a8924786ec124d466f9ba, type: 2}
     <loop>k__BackingField: 0
-    <volume>k__BackingField: 0.75
+    <volume>k__BackingField: 0.5
     <pitch>k__BackingField: 1
     audioSource: {fileID: 0}
 --- !u!4 &584213261
