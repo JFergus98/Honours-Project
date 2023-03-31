@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1589076903672240395, guid: 039bd567b81b71243a6a061e85fed42e, type: 3}
       propertyPath: m_Name
-      value: ObstacleBounds Variant 2
+      value: ObstacleBounds_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1589076903672240395, guid: 039bd567b81b71243a6a061e85fed42e, type: 3}
+      propertyPath: m_TagString
+      value: ObstacleBounds
       objectReference: {fileID: 0}
     - target: {fileID: 1589076903672240398, guid: 039bd567b81b71243a6a061e85fed42e, type: 3}
       propertyPath: m_RootOrder
