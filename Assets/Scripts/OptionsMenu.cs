@@ -54,8 +54,6 @@ public class OptionsMenu : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        // PlayerPrefs.DeleteAll();
-
         player = GameObject.Find("Player");
         
         if (player)
