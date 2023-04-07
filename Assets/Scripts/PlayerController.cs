@@ -33,8 +33,6 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGroundedLastUpdate = true;
 
-    //private float maxSlopeAngle = 40;
-
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
@@ -94,6 +92,10 @@ public class PlayerController : MonoBehaviour
     // FixedUpdate is called once per 0.02 seconds
     private void FixedUpdate()
     {
+        // Set grounded and on slope variables
+        bool grounded = IsGrounded();
+        bool onSlope = OnSlope();
+
         // Convert player move input from a Vector2 to Vector3
         Vector3 movement = new Vector3(moveInput.x, 0f, moveInput.y);
 
@@ -103,7 +105,7 @@ public class PlayerController : MonoBehaviour
         movement.Normalize();
         
         // If the player is on a slope, then get slope movement
-        if (OnSlope()) {
+        if (onSlope) {
             movement = GetSlopeMovement(movement);
         }
         
@@ -116,9 +118,9 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(movement * speed, ForceMode.Force);
 
         // If player is grounded and there is no move input, then apply a friction force
-        if (OnSlope() && Mathf.Abs(moveInput.magnitude) < 0.01f) {
+        if (onSlope && Mathf.Abs(moveInput.magnitude) < 0.01f) {
             playerRb.AddForce(new Vector3(playerRb.velocity.x, playerRb.velocity.y, playerRb.velocity.z) * -frictionForce, ForceMode.Impulse);
-        }else if (IsGrounded() && Mathf.Abs(moveInput.magnitude) < 0.01f) {
+        }else if (grounded && Mathf.Abs(moveInput.magnitude) < 0.01f) {
             playerRb.AddForce(new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z) * -frictionForce, ForceMode.Impulse);
         }
 
@@ -132,14 +134,14 @@ public class PlayerController : MonoBehaviour
         }
         
         // If player is grounded and moving, then play movement audio clip
-        if (IsGrounded() && Mathf.Abs(moveInput.magnitude) > 0.01f && !audioManager.isPlayingSound("Movement")) {
+        if (grounded && Mathf.Abs(moveInput.magnitude) > 0.01f && !audioManager.isPlayingSound("Movement")) {
             
             audioManager.PlaySound("Movement");
             Debug.Log("playing audio movement");
         }
 
         // If player is not grounded or moving, then stop movement audio clip
-        if ((!IsGrounded() || Mathf.Abs(moveInput.magnitude) < 0.01f) && audioManager.isPlayingSound("Movement")) {
+        if ((!grounded || Mathf.Abs(moveInput.magnitude) < 0.01f) && audioManager.isPlayingSound("Movement")) {
             Debug.Log("stoping audio movement");
         }
 
@@ -162,19 +164,20 @@ public class PlayerController : MonoBehaviour
         }
 
         // If player is on a slope and is grounded, then disable gravity and apply a force on the player towrds the slope
-        if (OnSlope()) {
+        if (onSlope) {
             playerRb.AddForce(-hitInfo.normal * 50f, ForceMode.Force);
             playerRb.useGravity = false;
         }else{
             playerRb.useGravity = true;
         }
 
-        if (IsGrounded() && IsGroundedLastUpdate == false) {
+        // If player has just landed back on ground, then play jump land audio clip
+        if (grounded && IsGroundedLastUpdate == false) {
             audioManager.PlaySound("JumpLand");
-
         }
 
-        IsGroundedLastUpdate = IsGrounded();
+        // Update IsGroundedLastUpdate
+        IsGroundedLastUpdate = grounded;
     }
 
     // Returns true if the player object is in contact with the ground
