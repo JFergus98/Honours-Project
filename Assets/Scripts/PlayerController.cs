@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
             jumpBufferTimer -= Time.deltaTime;
         }
 
-        // If jumping is true and jump delay timer is less than or equal to 0, then set is jumping to false, else let jump delay timer count down
+        // If jumping is true and jump delay timer is less than or equal to 0, then set is jumping to false (then allow the player to jump), else let jump delay timer count down
         if (isJumping && jumpDelayTimer <= 0) {
 			isJumping = false;
         }else{
