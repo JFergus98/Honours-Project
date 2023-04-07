@@ -137,12 +137,7 @@ public class PlayerController : MonoBehaviour
         if (grounded && Mathf.Abs(moveInput.magnitude) > 0.01f && !audioManager.isPlayingSound("Movement")) {
             
             audioManager.PlaySound("Movement");
-            Debug.Log("playing audio movement");
-        }
-
-        // If player is not grounded or moving, then stop movement audio clip
-        if ((!grounded || Mathf.Abs(moveInput.magnitude) < 0.01f) && audioManager.isPlayingSound("Movement")) {
-            Debug.Log("stoping audio movement");
+            // Debug.Log("playing audio movement");
         }
 
         // If the player is not currently jumping and the coyote and jump buffer timers are positive, then the player jumps
