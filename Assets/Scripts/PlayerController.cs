@@ -193,13 +193,6 @@ public class PlayerController : MonoBehaviour
         if (!IsGrounded()) {
             return false;
         }
-        // if (!Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayerMask)) {
-        //     return false; 
-        // }
-        // If player is not in contact with the ground, then return false
-        // if (!Physics.SphereCast(transform.position, groundCheckRadius, Vector3.down, out hitInfo, 1f, groundLayerMask)) {
-        //     return false;
-        // }
         if (!Physics.BoxCast(transform.position, new Vector3(groundCheckRadius, groundCheckRadius, groundCheckRadius), Vector3.down, out hitInfo, Quaternion.identity, 0.5f, groundLayerMask)) {
             return false;
         }
