@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
             jumpBufferTimer -= Time.deltaTime;
         }
 
-        // is jumping is true and jump delay timer is less than or equal to 0, then set is jumping to false, else let jump delay timer count down
+        // If jumping is true and jump delay timer is less than or equal to 0, then set is jumping to false, else let jump delay timer count down
         if (isJumping && jumpDelayTimer <= 0) {
 			isJumping = false;
         }else{
@@ -189,41 +189,12 @@ public class PlayerController : MonoBehaviour
         }
         // If player is not in contact with the ground, then return true
         return Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayerMask);
-        
-        /**
-        //bool grounded;
-
-        //raycast
-        //grounded = Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayerMask);
-
-        //spherecast
-        //grounded = Physics.SphereCast(transform.position, sphereRadius, Vector3.down, out RaycastHit hit, sphereCastDistance, groundLayerMask);
-
-        
-
-        // if (Physics.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, Vector3.down, groundCheck.rotation, 1f, groundLayerMask)) {
-        //     grounded = true;
-        // }else{
-        //     grounded = false;
-        // }
-
-        // //boxcast
-        // if (Physics.BoxCast(transform.position, boxSize, Vector3.down, transform.rotation, maxDistance, groundLayerMask)) {
-        //     grounded = true;
-        // }else{
-        //     grounded = false;
-        // }
-
-        //Debug.Log("grounded: " + grounded); //testing
-
-        //return grounded;
-        */
     }
 
     // Returns true if the player object is in contact with a slope
     private bool OnSlope()
     {   
-        // If player is jumping, then return false
+        // If player is not grounded, then return false
         if (!IsGrounded()) {
             return false;
         }
