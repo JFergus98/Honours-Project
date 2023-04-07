@@ -12,6 +12,10 @@ PrefabInstance:
       value: ObstacleBounds_1
       objectReference: {fileID: 0}
     - target: {fileID: 1589076903672240395, guid: 039bd567b81b71243a6a061e85fed42e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1589076903672240395, guid: 039bd567b81b71243a6a061e85fed42e, type: 3}
       propertyPath: m_TagString
       value: ObstacleBounds
       objectReference: {fileID: 0}
