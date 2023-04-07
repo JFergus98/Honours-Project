@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private const float maxSpeed = 7f;
     private const float frictionForce = 0.2f;
     private const float groundCheckRadius = 0.45f;
+    private const float wallCheckRadius = 0.6f;
 
     private const float jumpForce  = 5.56f;
     private bool isJumping;
@@ -158,7 +159,7 @@ public class PlayerController : MonoBehaviour
             coyoteTimer = 0;
         }
 
-        // If player is on a slope and is grounded, then disable gravity and apply a force on the player towrds the slope
+        // If player is on a slope and is grounded, then disable gravity and apply a force on the player towards the slope
         if (onSlope) {
             playerRb.AddForce(-hitInfo.normal * 50f, ForceMode.Force);
             playerRb.useGravity = false;
@@ -213,13 +214,14 @@ public class PlayerController : MonoBehaviour
     // Returns true if the player object is in contact with a wall while airborn
     private bool IsTouchingWall()
     {   
-        if (Physics.CheckBox(transform.position, Vector3.one * 0.6f, Quaternion.identity, groundLayerMask) && Physics.CheckCapsule(transform.position + Vector3.up * 0.5f, transform.position + Vector3.down * 0.5f, 0.6f, groundLayerMask))
+        if (Physics.CheckBox(transform.position, Vector3.one * wallCheckRadius, Quaternion.identity, groundLayerMask) && Physics.CheckCapsule(transform.position + Vector3.up * 0.5f, transform.position + Vector3.down * 0.5f, wallCheckRadius, groundLayerMask))
         {
             return true;
         }
         return false;
     }
 
+    // Returns adjusted movement and the wall modifier out parameter, adjusts movement so that the movement in ther direction of the wall is set to zero, then calculates the wall modifier by dividing the final movement magniture by its initial magnitude.
     private Vector3 GetWallMovement(Vector3 movement, out float result)
     {
         float initialMag = movement.magnitude; 
