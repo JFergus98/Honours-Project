@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private const float maxSpeed = 7f;
     private const float frictionForce = 0.2f;
     private const float groundCheckRadius = 0.45f;
-    private const float wallCheckRadius = 0.6f;
+    private const float wallCheckRadius = 0.52f;
 
     private const float jumpForce  = 5.56f;
     private bool isJumping;
@@ -87,7 +87,6 @@ public class PlayerController : MonoBehaviour
         // Debug.Log("OnSlope: " + OnSlope()); // Testing
         
         // Debug.Log("IsTouchingWall: " + IsTouchingWall()); // Testing
-        // Debug.Log("wallMod: " + wallMod);
     }
 
     // FixedUpdate is called once per 0.02 seconds
@@ -112,7 +111,8 @@ public class PlayerController : MonoBehaviour
         
         float wallMod = 1;
         if (IsTouchingWall()) {
-            movement = GetWallMovement(movement.normalized, out wallMod);
+            movement = GetWallMovement(movement.normalized, out wallMod); 
+            // Debug.Log("wallMod: " + wallMod); // testing
         }
 
         // Move the player
