@@ -252,20 +252,17 @@ public class PlayerController : MonoBehaviour
         return movement;
     }
 
-    void OnCollisionStay(Collision collision) {
-        ContactPoint contact = collision.contacts[0];
+    // OnCollisionStay is called once per frame for every Collider or Rigidbody that touches another Collider or Rigidbody.
+    void OnCollisionStay(Collision collision)
+    {
+        // Get first contact point from contact
+        ContactPoint contact = collision.GetContact(0);
 
-        // Visualize the contact point
+        // Visualize the contact point, for testing
         Debug.DrawRay(contact.point, contact.normal, Color.red);
         
+        // if the colliders normal is perpindicular to the y-axis, then set wall normal equal to it.
         if (new Vector2(contact.normal.x, contact.normal.z).magnitude == 1) { 
-            // if (contact.normal.x >= contact.normal.z) {
-            //     wallNormal = new Vector3(contact.normal.x, 0 ,0);
-            // }
-            // else {
-            //     wallNormal = new Vector3(0, 0 ,contact.normal.z);
-            // }
-            
             wallNormal = new Vector3(contact.normal.x, 0 ,contact.normal.z);
         }
     }
