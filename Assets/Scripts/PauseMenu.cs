@@ -159,9 +159,10 @@ public class PauseMenu : MonoBehaviour
     {
         int index = SceneManager.GetActiveScene().buildIndex + 1;
 
-        if (index > SceneManager.sceneCountInBuildSettings)
+        if (index >= SceneManager.sceneCountInBuildSettings)
         {
             ReturnToMenu();
+            return;
         }
 
         LoadLevel(index);
