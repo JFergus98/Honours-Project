@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
         Vector3 groundVelocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
         
         // If players grounded velocity is greater than max speed, then limit ther velocity
-        if  (groundVelocity.magnitude > maxSpeed) {
+        if  (groundVelocity.magnitude > maxSpeed * wallMod) {
             Vector3 maxVelocity = groundVelocity.normalized * maxSpeed * wallMod;
             playerRb.velocity = new Vector3(maxVelocity.x, playerRb.velocity.y, maxVelocity.z);
         }
@@ -246,8 +246,6 @@ public class PlayerController : MonoBehaviour
         }else{
             result = 1;
         }
-
-        // Debug.Log("result: " + result);
 
         return movement;
     }
