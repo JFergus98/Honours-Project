@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private const float speed = 50f;
     private const float maxSpeed = 7f;
     private const float frictionForce = 0.2f;
-    private const float groundCheckRadius = 0.45f;
+    private const float groundCheckRadius = 0.4f; // could be smaller still can achieve ground state on wall sometimes
     private const float wallCheckRadius = 0.52f;
 
     private const float jumpForce  = 5.56f;
