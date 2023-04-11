@@ -1,6 +1,8 @@
 using UnityEngine;
 using Cinemachine;
 
+// Adapted from code seen in the following video, the code can be seen from 13:53 to 20:25.
+// samyam (2020). Cinemachine First Person Controller w/ Input System - Unity Tutorial. YouTube. Available at: https://youtu.be/5n_hmqHdijM?t= [Accessed 26 Feb. 2023].
 public class CinemachinePOVExtension : CinemachineExtension
 {
     [SerializeField]
