@@ -43,6 +43,7 @@ public class GhostPlayer : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        // Initialise time
         time = offset;
     }
 
@@ -52,11 +53,11 @@ public class GhostPlayer : MonoBehaviour
         // Increment time
         time += Time.deltaTime;
 
-        UpdateGhostObjects();
-        
+        // Update Ghost Objects' position and rotation
+        UpdateGhostObjects();     
     }
 
-    // Update the ghost objects based on the current time
+    // Update the ghost objects' position and rotation, based on the current time
     private void UpdateGhostObjects()
     {
         // For each ghost excluding the new one
