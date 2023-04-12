@@ -81,7 +81,7 @@ public class GhostPlayer : MonoBehaviour
                     ghostObjects[i-1].transform.rotation = Quaternion.Lerp(currGhostData.rotation, nextGhostData.rotation, interpolationFactor);
                 }
 
-                // Else if time equals ghost data's timestamp
+                // Else if time equals next ghost data's timestamp
                 else if (time == nextGhostData.timeStamp)
                 {
                     // Set ghost objects position and rotation to current ghost data postion and rotation
