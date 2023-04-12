@@ -13,12 +13,6 @@ public class SpawnObstacles : MonoBehaviour
     [SerializeField]
     private List<Spawner> spawnerList = new List<Spawner>();
 
-    // Awake is called when the script instance is being loaded
-    private void Awake()
-    {
-        
-    }
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -27,21 +21,17 @@ public class SpawnObstacles : MonoBehaviour
         Random.InitState(seedScrObj.seed);
 
         // Run ObstacleSpawner() function for each spawner in the list
-        foreach (Spawner spawner in spawnerList) {
+        foreach (Spawner spawner in spawnerList)
+        {
             StartCoroutine(ObstacleSpawner(spawner.getObstaclePrefab(), spawner.getTransform()));
         }
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
     }
 
     // Spawns object at the transform randomly
     IEnumerator ObstacleSpawner(GameObject prefab, Transform spawner)
     {
-        while (true) {
+        while (true)
+        {
             // wait random amount of time, then spawn obstacle
             yield return new WaitForSeconds(Random.Range(minTime, maxTime));
             Instantiate(prefab, spawner);
