@@ -56,21 +56,24 @@ public class PlayerController : MonoBehaviour
         moveInput = inputManager.GetPlayerMovement();
 
         // If player is grounded, then reset coyete timer, else let coyete timer count down
-        if (IsGrounded()) {
+        if (IsGrounded())
+        {
             coyoteTimer = coyoteTime;
         }else{
             coyoteTimer -= Time.deltaTime;
         }
 
         // If jump button is pressed, then reset jump buffer timer, else let jump buffer timer count down
-        if (inputManager.PlayerJumped()) {
+        if (inputManager.PlayerJumped())
+        {
             jumpBufferTimer = jumpBuffer;
         }else{
             jumpBufferTimer -= Time.deltaTime;
         }
 
         // If jumping is true and jump delay timer is less than or equal to 0, then set is jumping to false (then allow the player to jump), else let jump delay timer count down
-        if (isJumping && jumpDelayTimer <= 0) {
+        if (isJumping && jumpDelayTimer <= 0)
+        {
 			isJumping = false;
         }else{
             jumpDelayTimer -= Time.deltaTime;
@@ -105,12 +108,14 @@ public class PlayerController : MonoBehaviour
         movement.Normalize();
         
         // If the player is on a slope, then get slope movement
-        if (onSlope) {
+        if (onSlope)
+        {
             movement = GetSlopeMovement(movement);
         }
         
         float wallMod = 1;
-        if (IsTouchingWall()) {
+        if (IsTouchingWall())
+        {
             movement = GetWallMovement(movement.normalized, out wallMod); 
             // Debug.Log("wallMod: " + wallMod); // testing
         }
@@ -119,9 +124,11 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(movement * speed, ForceMode.Force);
 
         // If player is grounded and there is no move input, then apply a friction force
-        if (onSlope && Mathf.Abs(moveInput.magnitude) < 0.01f) {
+        if (onSlope && Mathf.Abs(moveInput.magnitude) < 0.01f)
+        {
             playerRb.AddForce(new Vector3(playerRb.velocity.x, playerRb.velocity.y, playerRb.velocity.z) * -frictionForce, ForceMode.Impulse);
-        }else if (grounded && Mathf.Abs(moveInput.magnitude) < 0.01f) {
+        }else if (grounded && Mathf.Abs(moveInput.magnitude) < 0.01f)
+        {
             playerRb.AddForce(new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z) * -frictionForce, ForceMode.Impulse);
         }
 
@@ -129,20 +136,22 @@ public class PlayerController : MonoBehaviour
         Vector3 groundVelocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
         
         // If players grounded velocity is greater than max speed, then limit ther velocity
-        if  (groundVelocity.magnitude > maxSpeed * wallMod) {
+        if  (groundVelocity.magnitude > maxSpeed * wallMod)
+        {
             Vector3 maxVelocity = groundVelocity.normalized * maxSpeed * wallMod;
             playerRb.velocity = new Vector3(maxVelocity.x, playerRb.velocity.y, maxVelocity.z);
         }
         
         // If player is grounded and moving, then play movement audio clip
-        if (grounded && Mathf.Abs(moveInput.magnitude) > 0.01f && !audioManager.isPlayingSound("Movement")) {
-            
+        if (grounded && Mathf.Abs(moveInput.magnitude) > 0.01f && !audioManager.isPlayingSound("Movement"))
+        {
             audioManager.PlaySound("Movement");
             // Debug.Log("playing audio movement");
         }
 
         // If the player is not currently jumping and the coyote and jump buffer timers are positive, then the player jumps
-        if (!isJumping && coyoteTimer > 0 && jumpBufferTimer > 0) {
+        if (!isJumping && coyoteTimer > 0 && jumpBufferTimer > 0)
+        {
             // Set isJumping to true
             isJumping = true;
             
@@ -160,7 +169,8 @@ public class PlayerController : MonoBehaviour
         }
 
         // If player is on a slope and is grounded, then disable gravity and apply a force on the player towards the slope
-        if (onSlope) {
+        if (onSlope)
+        {
             playerRb.AddForce(-hitInfo.normal * 50f, ForceMode.Force);
             playerRb.useGravity = false;
         }else{
@@ -168,7 +178,8 @@ public class PlayerController : MonoBehaviour
         }
 
         // If player has just landed back on ground, then play jump land audio clip
-        if (grounded && IsGroundedLastUpdate == false) {
+        if (grounded && IsGroundedLastUpdate == false)
+        {
             audioManager.PlaySound("JumpLand");
         }
 
@@ -180,7 +191,8 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         // If player is jumping, then return false
-        if (isJumping) {
+        if (isJumping)
+        {
             return false;
         }
         // If player is not in contact with the ground, then return true
@@ -191,16 +203,22 @@ public class PlayerController : MonoBehaviour
     private bool OnSlope()
     {   
         // If player is not grounded, then return false
-        if (!IsGrounded()) {
+        if (!IsGrounded())
+        {
             return false;
         }
-        if (!Physics.BoxCast(transform.position, new Vector3(groundCheckRadius, groundCheckRadius, groundCheckRadius), Vector3.down, out hitInfo, Quaternion.identity, 0.5f, groundLayerMask)) {
+
+        if (!Physics.BoxCast(transform.position, new Vector3(groundCheckRadius, groundCheckRadius, groundCheckRadius), Vector3.down, out hitInfo, Quaternion.identity, 0.5f, groundLayerMask))
+        {
             return false;
         }
+
         // If the ground is a not a slope, then return false
-        if(hitInfo.normal == Vector3.up) {
+        if(hitInfo.normal == Vector3.up)
+        {
             return false;
         }
+
         // Else the player is on a slope, so return true
         return true; 
     }
@@ -226,22 +244,27 @@ public class PlayerController : MonoBehaviour
     {
         float initialMag = movement.magnitude; 
 
-        if (movement.x < 0 && wallNormal.normalized.x > 0) {
+        if (movement.x < 0 && wallNormal.normalized.x > 0)
+        {
             movement.x = 0;
         }
-        else if (movement.x > 0 && wallNormal.normalized.x < 0) {
+        else if (movement.x > 0 && wallNormal.normalized.x < 0)
+        {
             movement.x = 0;
         }
-        if (movement.z < 0 && wallNormal.normalized.z > 0) {
+        if (movement.z < 0 && wallNormal.normalized.z > 0)
+        {
             movement.z = 0;
         }
-        else if (movement.z > 0 && wallNormal.normalized.z < 0) {
+        else if (movement.z > 0 && wallNormal.normalized.z < 0)
+        {
             movement.z = 0;
         }
         
         float finalMag = movement.magnitude;
 
-        if (initialMag != 0){
+        if (initialMag != 0)
+        {
             result = finalMag/initialMag;
         }else{
             result = 1;
@@ -260,7 +283,8 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(contact.point, contact.normal, Color.red);
         
         // if the colliders normal is perpindicular to the y-axis, then set wall normal equal to it.
-        if (new Vector2(contact.normal.x, contact.normal.z).magnitude == 1) { 
+        if (new Vector2(contact.normal.x, contact.normal.z).magnitude == 1)
+        { 
             wallNormal = new Vector3(contact.normal.x, 0 ,contact.normal.z);
         }
     }
