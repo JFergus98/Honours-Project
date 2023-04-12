@@ -7,8 +7,10 @@ public sealed class AudioManager : MonoBehaviour
 {
     private static AudioManager _instance;
 
-    public static AudioManager Instance {
-        get {
+    public static AudioManager Instance
+    {
+        get
+        {
             return _instance;
         }
     }
@@ -22,12 +24,12 @@ public sealed class AudioManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         // If there is already an instance, then delete self;
-        if (_instance != null && _instance != this) {
+        if (_instance != null && _instance != this)
+        {
             Debug.Log("An instance of AudioManager already exists in the scene.");
             Destroy(this.gameObject);
             return;
-        }
-        else {
+        }else{
             _instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
@@ -42,16 +44,6 @@ public sealed class AudioManager : MonoBehaviour
             sound.audioSource.pitch = sound.pitch;
         }
     }
-
-    // private void Update(){
-    //     foreach (Sound sound in sounds)
-    //     {
-    //         if (!sound.audioSource.isPlaying)
-    //         {
-    //             sound.audioSource.clip = sound.GetRandomAudioClip();
-    //         }
-    //     }
-    // }
 
     public void PlaySound(string name)
     {
