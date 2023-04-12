@@ -21,6 +21,10 @@ public class Obstacle : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        // if (transform.position.x > 0)
+        // {
+        //     direction = -1;
+        // }
         // Set the Obstacle Velocity
         rb.velocity = new Vector3(speed*direction, 0, 0);
         
@@ -42,7 +46,8 @@ public class Obstacle : MonoBehaviour
     private void OnTriggerExit(Collider collider)
     {
         // If obstacle collider collides with ObstacleBounds, then destroy Obastacle
-        if (collider.CompareTag("ObstacleBounds")) {    
+        if (collider.CompareTag("ObstacleBounds"))
+        {    
             Destroy(this.gameObject);
             // Debug.Log(collider.name);
             // Debug.Log("Obsticle destroyed");
