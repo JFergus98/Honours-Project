@@ -17,7 +17,8 @@ public class GhostRecorder : MonoBehaviour
     private void Awake()
     {
         // If GameManager exists, then start recording
-        if (GameObject.Find("GhostManager")) {
+        if (GameObject.Find("GhostManager"))
+        {
             record = true;
             Debug.Log("Recording has started");
         }else{
@@ -25,12 +26,14 @@ public class GhostRecorder : MonoBehaviour
         }
         
         // If recording
-        if (record) {
+        if (record)
+        {
             // Add new ghost to the start of the list
             ghostScrObj.ghosts.Insert(0, new Ghost());
 
             // If List size is greater than max recordings, then remove excess items at end of list
-            if (ghostScrObj.ghosts.Count > maxRecordings) {
+            if (ghostScrObj.ghosts.Count > maxRecordings)
+            {
                 ghostScrObj.ghosts.RemoveRange(maxRecordings, ghostScrObj.ghosts.Count-maxRecordings);
             }
         }else{
@@ -39,7 +42,8 @@ public class GhostRecorder : MonoBehaviour
         }
 
         // If List size is greater than max recordings, then remove excess items at end of list
-        if (ghostScrObj.ghosts.Count > maxRecordings) {
+        if (ghostScrObj.ghosts.Count > maxRecordings)
+        {
             ghostScrObj.ghosts.RemoveRange(maxRecordings, ghostScrObj.ghosts.Count-maxRecordings);
         }
     }
@@ -60,8 +64,8 @@ public class GhostRecorder : MonoBehaviour
         time += Time.deltaTime;
 
         // If recording and it is time to record
-        if (record && timer >= 1/ghostScrObj.recordFrequency) {
-
+        if (record && timer >= 1/ghostScrObj.recordFrequency)
+        {
             // Get current time, position and rotation data
             GhostData data = new GhostData(time, this.transform.position, this.transform.rotation);
             
