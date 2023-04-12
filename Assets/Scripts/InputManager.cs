@@ -8,8 +8,10 @@ public sealed class InputManager : MonoBehaviour
 {
     private static InputManager _instance;
 
-    public static InputManager Instance {
-        get {
+    public static InputManager Instance
+    {
+        get
+        {
             return _instance;
         }
     }
@@ -26,12 +28,12 @@ public sealed class InputManager : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         
         // If there is already an instance, then delete self;
-        if (_instance != null && _instance != this) {
+        if (_instance != null && _instance != this)
+        {
             Debug.Log("An instance of InputManager already exists in the scene.");
             Destroy(this.gameObject);
             return;
-        }
-        else {
+        }else{
             _instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
