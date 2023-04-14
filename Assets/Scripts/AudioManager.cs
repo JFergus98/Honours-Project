@@ -58,7 +58,7 @@ public sealed class AudioManager : MonoBehaviour
         }
     }
 
-    public bool isPlayingSound(string name)
+    public bool IsPlayingSound(string name)
     {
         Sound sound = SearchForSound(name);
         
@@ -71,7 +71,7 @@ public sealed class AudioManager : MonoBehaviour
         return false;
     }
  
-    public Sound SearchForSound(string name)
+    private Sound SearchForSound(string name)
     {
         foreach (Sound sound in sounds)
         {
