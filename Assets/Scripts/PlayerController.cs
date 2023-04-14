@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
         }
         
         // If player is grounded and moving, then play movement audio clip
-        if (grounded && Mathf.Abs(moveInput.magnitude) > 0.01f && !audioManager.isPlayingSound("Movement"))
+        if (grounded && Mathf.Abs(moveInput.magnitude) > 0.01f && !audioManager.IsPlayingSound("Movement"))
         {
             audioManager.PlaySound("Movement");
             // Debug.Log("playing audio movement");
