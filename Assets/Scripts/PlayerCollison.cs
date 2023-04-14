@@ -11,7 +11,7 @@ public class PlayerCollison : MonoBehaviour
     {
         pauseMenu = GameObject.Find("PauseMenuCanvas").GetComponent<PauseMenu>();
 
-        Debug.Log("pauseMenu " + pauseMenu);
+        // Debug.Log("pauseMenu " + pauseMenu);  // Testing
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -19,7 +19,7 @@ public class PlayerCollison : MonoBehaviour
         // If player collider collides with an Obstacle, then restart level
         if (collision.collider.CompareTag("Obstacle"))
         {    
-            Debug.Log(collision.collider.name);
+            // Debug.Log(collision.collider.name);  // Testing
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
             SceneManager.LoadScene(1, LoadSceneMode.Additive);
@@ -31,7 +31,7 @@ public class PlayerCollison : MonoBehaviour
         // If player collider enters the Finish Bounds, then end Level
         if (collider.CompareTag("FinishBounds"))
         {    
-            Debug.Log(collider.name);
+            // Debug.Log(collider.name); // Testing
 
             pauseMenu.LevelCompleted();
         }
@@ -42,7 +42,7 @@ public class PlayerCollison : MonoBehaviour
         // If player collider exits the Player Bounds, then restart level
         if (collider.CompareTag("PlayerBounds"))
         {    
-            Debug.Log(collider.name);
+            // Debug.Log(collider.name); // Testing
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
             SceneManager.LoadScene(1, LoadSceneMode.Additive);
