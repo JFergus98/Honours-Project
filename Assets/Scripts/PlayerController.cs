@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         // Get player movement input;
         moveInput = inputManager.GetPlayerMovement();
 
-        // If player is grounded, then reset coyete timer, else let coyete timer count down
+        // If the player is grounded, then reset coyete timer, else decrement coyete timer
         if (IsGrounded())
         {
             coyoteTimer = coyoteTime;
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
             coyoteTimer -= Time.deltaTime;
         }
 
-        // If jump button is pressed, then reset jump buffer timer, else let jump buffer timer count down
+        // If the jump input is triggerd, then reset the jump buffer timer, else decrement jump buffer timer
         if (inputManager.PlayerJumped())
         {
             jumpBufferTimer = jumpBuffer;
@@ -155,7 +155,9 @@ public class PlayerController : MonoBehaviour
             // Set isJumping to true
             isJumping = true;
             
+            // Reset y-component of velocity
             playerRb.velocity = new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z);
+            
             // Apply upward force
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
