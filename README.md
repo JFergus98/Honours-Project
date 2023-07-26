@@ -1,5 +1,7 @@
 # Honours-Project - The Development of a 3D Game with a Time Loop Mechanic
 
+This Project was created by Jamie Fergus for his final year project(2022-2023) at the Univercity of Dundee
+
 The aim of this project was to create a unique 3D 
 game, utilising a time loop mechanic, and to understand 
 what goes into game development. Inspiration was taken 
