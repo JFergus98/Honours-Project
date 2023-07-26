@@ -8,5 +8,5 @@ Wilds, The Legend of Zelda, and games such as Superhot
 and Neon White. 
  
 This Github directory includes:
-- All the relevant UUnity files and C# scripts
+- All the relevant Unity files and C# scripts
 - The Final Project Report
