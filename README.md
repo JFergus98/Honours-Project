@@ -11,4 +11,5 @@ and Neon White.
  
 This Github directory includes:
 - The entire Unity project directory including all files and C# scripts
+  - C# scripts can be found in Assets/Scripts
 - The Final Project Report
