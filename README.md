@@ -10,5 +10,5 @@ Wilds, The Legend of Zelda, and games such as Superhot
 and Neon White. 
  
 This Github directory includes:
-- All the relevant Unity files and C# scripts
+- The entire Unity project directory including all files and C# scripts
 - The Final Project Report
